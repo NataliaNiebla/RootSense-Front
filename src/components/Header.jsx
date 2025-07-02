@@ -1,13 +1,15 @@
 import React from 'react';
 import icon from '../assets/imgs/iconpng.png'; // adjust the path if necessary
 import '../styles/HeaderStyles.css';
+import { useSidebar } from '../hooks/useSidebar';
 
-const Header = ({ title = '', sidebarCollapsed = false }) => {
+const Header = ({ title = '' }) => {
+    const { collapsed } = useSidebar();
     return (
         <header 
-            className={sidebarCollapsed ? 'sidebar-collapsed' : ''}
+            className={collapsed ? 'sidebar-collapsed' : ''}
             style={{
-                left: sidebarCollapsed ? '80px' : '260px',
+                left: collapsed ? '80px' : '260px',
                 transition: 'left 0.3s ease'
             }}
         >
@@ -25,4 +27,4 @@ const Header = ({ title = '', sidebarCollapsed = false }) => {
 export default Header;
 
 //uso de componente
-// <Header title="Dashboard" sidebarCollapsed={collapsed} />
+// <Header title="Dashboard" />

@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
-import { MenuFoldOutlined, MenuUnfoldOutlined, UploadOutlined, UserOutlined, VideoCameraOutlined, } from '@ant-design/icons';
-import { Button, Layout, Menu, theme } from 'antd';
+import React from 'react';
+import { UploadOutlined, UserOutlined, VideoCameraOutlined, } from '@ant-design/icons';
+import { Layout, Menu, theme } from 'antd';
 import { useNavigate, Outlet, useLocation} from 'react-router-dom';
 import logo from '../assets/imgs/RS_logo.png'; 
 import icon from '../assets/imgs/iconpng.png'; // adjust the path if necessary
 import '../styles/Sidebar.css'; 
 import SidebarToggleButton from '../components/SidebarToggleButton';
+import { useSidebar } from '../hooks/useSidebar';
 
 const { Header, Sider, Content } = Layout;
 
 const Sidebar = () => {
-    const [collapsed, setCollapsed] = useState(false);
+    const { collapsed, toggleSidebar } = useSidebar();
     const {
         token: { colorBgContainer },
     } = theme.useToken();
@@ -30,7 +31,7 @@ const Sidebar = () => {
                         transition: 'left 0.3s ease',
                         }}
                     >
-                    <SidebarToggleButton collapsed={collapsed} onToggle={() => setCollapsed(!collapsed)} />
+                    <SidebarToggleButton collapsed={collapsed} onToggle={toggleSidebar} />
             </div>
 
                  <div className="sidebar-header">
@@ -53,7 +54,7 @@ const Sidebar = () => {
                 { key: '/bandejas', icon: <VideoCameraOutlined />, label: 'Bandejas'},
                 { key: '/reportes', icon: <UploadOutlined />, label: 'Reportes Semanales'},
                 { key: '/bitacora', icon: <UserOutlined />, label: 'Bitácora'},
-                { key: '/usuarios', icon: <VideoCameraOutlined />, label: 'Gestión de usuarios'},
+                { key: '/usuarios', icon: <VideoCameraOutlined />, label: 'Usuarios'},
                 { key: '/actuadores', icon: <UploadOutlined />, label: 'Actuadores'},
                 { key: '/sensores', icon: <UserOutlined />, label: 'Sensores'},
                 { key: '/configuracion', icon: <VideoCameraOutlined />, label: 'Configuración'},

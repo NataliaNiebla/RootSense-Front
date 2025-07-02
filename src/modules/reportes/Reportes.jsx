@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header';
+import { usePage } from '../../hooks/usePage';
+import { useSidebar } from '../../hooks/useSidebar';
 import '../../styles/ReportesStyles.css';
 
 const Reportes = () => {
+    const { pageTitle, setPageTitle } = usePage('Reportes');
+    const { collapsed } = useSidebar();
     const [selectedReport, setSelectedReport] = useState(null);
     const [showDetail, setShowDetail] = useState(false);
     const [showModal, setShowModal] = useState(false);
@@ -14,6 +18,10 @@ const Reportes = () => {
         calidadGerminacion: '',
         calificacion: ''
     });
+
+    useEffect(() => {
+        setPageTitle('Reportes Semanales');
+    }, [setPageTitle]);
 
     // Sample report data (in a real app, this would come from a database/API)
     const reportData = {
@@ -153,8 +161,12 @@ const Reportes = () => {
 
     return (
         <div>
-            <Header title="Reportes" />
-            <div className="action-bar">
+            <Header title={pageTitle} />
+            <div className="action-bar" style={{
+                marginLeft: collapsed ? '80px' : '260px',
+                transition: 'margin-left 0.3s ease',
+                padding: '24px'
+            }}>
                 <h1 className="section-title">Gestión de Reportes Semanales</h1>
                 <button onClick={handleCreateReport} className="btn-create">
                     <svg className="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -164,7 +176,11 @@ const Reportes = () => {
                 </button>
             </div>
 
-            <div className="table-container">
+            <div className="table-container" style={{
+                marginLeft: collapsed ? '80px' : '260px',
+                transition: 'margin-left 0.3s ease',
+                padding: '0 24px'
+            }}>
                 <table>
                     <thead>
                         <tr>

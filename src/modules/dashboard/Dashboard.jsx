@@ -1,11 +1,19 @@
 import React, { useEffect, useRef } from 'react';
 import Header from '../../components/Header'; // Asegúrate de que la ruta sea correcta
 import Chart from 'chart.js/auto';
+import { usePage } from '../../hooks/usePage';
+import { useSidebar } from '../../hooks/useSidebar';
 import '../../styles/DashboardStyles.css'; // Asegúrate de tener un archivo CSS para estilos
 
 const Dashboard = () => {
     const chartRef = useRef(null);
     const chartInstance = useRef(null);
+    const { pageTitle, setPageTitle } = usePage('Dashboard');
+    const { collapsed } = useSidebar();
+
+    useEffect(() => {
+        setPageTitle('Dashboard');
+    }, [setPageTitle]);
 
     useEffect(() => {
     const ctx = chartRef.current.getContext('2d');
@@ -70,8 +78,12 @@ const Dashboard = () => {
 
     return (
         <div className="dashboard">
-            <Header title="Dashboard" />
-            <main>
+            <Header title={pageTitle} />
+            <main style={{
+                marginLeft: collapsed ? '80px' : '260px',
+                transition: 'margin-left 0.3s ease',
+                padding: '24px'
+            }}>
             
                 {/* Cards */}
                 <section className="cards-container">

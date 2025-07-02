@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import BandejasGrid from './BandejasGrid';
 import ModalAddBandeja from './ModalAddBandeja';
 import '../../styles/BandejasStyles.css';
 import Header from '../../components/Header'; // Asegúrate de que la ruta sea correcta
+import { usePage } from '../../hooks/usePage';
+import { useSidebar } from '../../hooks/useSidebar';
 
-const Bandejas = ({ sidebarCollapsed = false }) => {
+const Bandejas = () => {
+    const { pageTitle, setPageTitle } = usePage('Bandejas');
+    const { collapsed } = useSidebar();
     const [modalOpen, setModalOpen] = useState(false);
     const [formValues, setFormValues] = useState({
         nombre: '',
@@ -12,6 +16,10 @@ const Bandejas = ({ sidebarCollapsed = false }) => {
         tipoSemilla: '',
         fechaInicio: ''
     });
+
+    useEffect(() => {
+        setPageTitle('Bandejas');
+    }, [setPageTitle]);
 
     // Datos de ejemplo
     const [bandejas, setBandejas] = useState([
@@ -104,15 +112,25 @@ const Bandejas = ({ sidebarCollapsed = false }) => {
 
     return (
         <div className="bandejas-page">
-            <Header title="Bandejas" sidebarCollapsed={sidebarCollapsed} />
-            <div className="action-bar">
+            <Header title={pageTitle} />
+            <div className="action-bar" style={{
+                marginLeft: collapsed ? '80px' : '260px',
+                transition: 'margin-left 0.3s ease',
+                padding: '24px'
+            }}>
                 <h2 className="section-title">Gestión de Bandejas</h2>
                 <button onClick={toggleModal} className="btn-add">
                     <span className="icon">+</span>
                     Agregar Bandeja
                 </button>
             </div>
-            <BandejasGrid bandejas={bandejas} />
+            <div style={{
+                marginLeft: collapsed ? '80px' : '260px',
+                transition: 'margin-left 0.3s ease',
+                padding: '0 24px'
+            }}>
+                <BandejasGrid bandejas={bandejas} />
+            </div>
             <ModalAddBandeja 
                 isOpen={modalOpen}
                 onClose={toggleModal}
