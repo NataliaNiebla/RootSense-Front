@@ -1,0 +1,52 @@
+/* Importación de fuentes */
+@import url('../src/styles/fonts.css');
+/* Importación de Tailwind CSS*/
+@import "tailwindcss";
+
+/* Variables */
+:root {
+  --color-primary: #b4e639;
+  --color-primary-dark: #2f6b1a;
+  --color-primary-light: #81C784; 
+  --color-background: #FFFFFF;
+  --color-container: #F5F5F5;
+  --color-border: #E0E0E0;
+  --color-error: #f44336;
+  --color-text: #373643;
+  --color-text-secondary: #757575;
+  --color-sidebar: #8B6F47;
+  --color-sidebar-hover: #9e7b4f63;
+  --color-text-light: #666666;
+  --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --border-radius: 8px;
+  --sidebar-width: 250px;
+  --header-height: 60px;
+}
+
+/* Reset y estilos generales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /*font-family: 'Roboto', sans-serif;*/
+}
+
+body {
+  background-color: var(--color-background);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 0px;
+}
+
+h1 {
+  font-family: 'Roboto-Med', sans-serif;
+  color: var(--color-primary-dark); /* Verde oscuro */
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 5px;
+}

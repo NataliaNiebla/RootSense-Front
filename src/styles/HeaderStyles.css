@@ -1,0 +1,52 @@
+/* Header */
+header {
+    grid-area: header; 
+    background-color: var(--color-white); 
+    box-shadow: var(--shadow-sm);
+    padding: 10px 20px;
+    position: sticky;
+    top: 0; 
+    z-index: 1000; 
+}
+
+.header-general {
+    display: flex;
+    align-items: center;
+    padding: .5rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 1rem;
+}
+
+.icon {
+    width: 80px;
+    height: auto;
+}
+
+.header-title {
+    font-size: 1.5rem;
+    color: var(--color-primary-dark);
+    margin: 0;
+}
+
+.logout-btn {
+    background-color: var(--color-primary-dark);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 8px 16px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.3s, transform 0.2s;
+    margin: 0 0 0 auto; 
+}
+
+.logout-btn:hover {
+    opacity: 0.8;
+    background-color: var(--color-primary-light);
+}
+
+.logout-btn:active {
+    transform: scale(0.98);
+}

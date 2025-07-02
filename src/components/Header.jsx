@@ -1,0 +1,22 @@
+import React from 'react';
+import icon from '../assets/imgs/iconpng.png'; // adjust the path if necessary
+import '../styles/HeaderStyles.css';
+
+const Header = ({ title = '' }) => {
+    return (
+        <header>
+            <div className="header-general">
+                <img src={icon} alt="Icon" className="icon" />
+                <h1 className='header-title'>{title}</h1>
+                <button className="logout-btn">
+                    <a href="/login">Cerrar Sesión</a>
+                </button>
+            </div>
+        </header>
+    );
+};
+
+export default Header;
+
+//uso de componente
+// <Header title="Dashboard" />

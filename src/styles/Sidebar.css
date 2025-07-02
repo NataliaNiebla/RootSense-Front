@@ -1,0 +1,72 @@
+.sidebar {
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-sm);
+  position: fixed; 
+  left: 0; 
+  top: 0;
+  bottom: 0;
+  height: 100vh;  
+  z-index: 1000;   /*´posible modificación para que se superponga al contenido */
+  transition: width 0.5s ease-in-out !important;  /*no esta funcionando*/
+}
+
+.sidebar-header {
+  display: flex;  /* Alinea los elementos en una fila */
+  flex-direction: column; /* Cambia a columna para alinear logo y título */
+  align-items: center;
+  padding: 16px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--color-border);
+  }
+
+.logo {
+  width: auto; /* Ancho automático para que se ajuste al contenido */
+  height: auto;
+  transition: all 0.3s ease-in-out;   /*no esta funcionando*/
+}
+
+.icon {
+  width: auto;
+  height: auto;
+  transition: all 0.3s ease-in-out;
+}
+
+.sidebar-menu {
+  padding-top: 1rem;
+  font-size: 15px;
+}
+
+.sidebar-menu .ant-menu-item {
+  margin-bottom: .8rem;
+  padding-left: 20px !important; /* Espaciado izquierdo */
+  transition: background-color 0.3s, color 0.3s;
+}         
+
+/* Hover */
+.sidebar-menu .ant-menu-item:hover {
+  background-color: rgba(139, 111, 71, 0.1) !important;
+  color: var(--color-sidebar) !important;
+}
+
+/* Ítem activo (seleccionado) */
+.sidebar-menu .ant-menu-item-selected {
+  background-color: var(--color-sidebar-hover) !important;
+  color: var(--color-sidebar) !important;
+  border-left: 3px solid var(--color-sidebar);
+}
+
+/* Ícono del menú */
+.sidebar-menu .ant-menu-item-icon {
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+}
+
+/* Botón de colapso */
+.collapse-button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 8px;
+  height: 48px;
+}
