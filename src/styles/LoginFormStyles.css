@@ -3,7 +3,7 @@
     background-color: var(--color-container); 
     max-width: 400px;
     width: 100%;
-    margin: 0 auto; /* Centrado horizontal */
+    margin: 12vh auto; /* Centrado horizontal */
     border-radius: var(--border-radius); 
     box-shadow: var(--shadow); 
     overflow: hidden; /* Evita que los elementos sobresalgan */

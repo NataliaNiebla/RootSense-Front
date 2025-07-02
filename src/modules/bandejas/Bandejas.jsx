@@ -102,6 +102,8 @@ const Bandejas = () => {
     };
 
     return (
+        <div className="bandejas">
+            <Header title="Bandejas" />
         <main>
             <div className="action-bar">
                 <h2 className="section-title">Gestión de Bandejas</h2>
@@ -119,6 +121,7 @@ const Bandejas = () => {
                 onChange={handleInputChange}
             />
         </main>
+        </div>
     );
 };
 
