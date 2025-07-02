@@ -18,8 +18,7 @@ function MenuRoutes() {
                 <Route index element={<Navigate to="/dashboard" replace />} />
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="bandejas" element={<Bandejas />} />
-                {/* Agregar rutas para otros componentes cuando estén disponibles */}
-                {/* <Route path="reportes" element={<Reportes />} /> */}
+                <Route path="reportes" element={<Reportes />} />
                 {/* <Route path="bitacora" element={<Bitacora />} /> */}
                 {/* <Route path="usuarios" element={<Usuarios />} /> */}
                 {/* <Route path="actuadores" element={<Actuadores />} /> */}
