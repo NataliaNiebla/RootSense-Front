@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import BandejasGrid from './BandejasGrid';
 import ModalAddBandeja from './ModalAddBandeja';
 import '../../styles/BandejasStyles.css';
+import Header from '../../components/Header'; // Asegúrate de que la ruta sea correcta
 
-const Bandejas = () => {
+const Bandejas = ({ sidebarCollapsed = false }) => {
     const [modalOpen, setModalOpen] = useState(false);
     const [formValues, setFormValues] = useState({
         nombre: '',
@@ -102,9 +103,8 @@ const Bandejas = () => {
     };
 
     return (
-        <div className="bandejas">
-            <Header title="Bandejas" />
-        <main>
+        <div className="bandejas-page">
+            <Header title="Bandejas" sidebarCollapsed={sidebarCollapsed} />
             <div className="action-bar">
                 <h2 className="section-title">Gestión de Bandejas</h2>
                 <button onClick={toggleModal} className="btn-add">
@@ -120,7 +120,6 @@ const Bandejas = () => {
                 formValues={formValues}
                 onChange={handleInputChange}
             />
-        </main>
         </div>
     );
 };
