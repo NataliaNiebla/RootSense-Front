@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Header from '../../components/Header';
 import '../../styles/ReportesStyles.css';
 
 const Reportes = () => {
@@ -152,6 +153,7 @@ const Reportes = () => {
 
     return (
         <div>
+            <Header title="Reportes" />
             <div className="action-bar">
                 <h1 className="section-title">Gestión de Reportes Semanales</h1>
                 <button onClick={handleCreateReport} className="btn-create">

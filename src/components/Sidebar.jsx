@@ -53,7 +53,7 @@ const Sidebar = () => {
                 { key: '/bandejas', icon: <VideoCameraOutlined />, label: 'Bandejas'},
                 { key: '/reportes', icon: <UploadOutlined />, label: 'Reportes Semanales'},
                 { key: '/bitacora', icon: <UserOutlined />, label: 'Bitácora'},
-                { key: '/usuarios', icon: <VideoCameraOutlined />, label: 'Usuarios'},
+                { key: '/usuarios', icon: <VideoCameraOutlined />, label: 'Gestión de usuarios'},
                 { key: '/actuadores', icon: <UploadOutlined />, label: 'Actuadores'},
                 { key: '/sensores', icon: <UserOutlined />, label: 'Sensores'},
                 { key: '/configuracion', icon: <VideoCameraOutlined />, label: 'Configuración'},
