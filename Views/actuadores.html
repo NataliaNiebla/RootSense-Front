@@ -1,0 +1,1109 @@
+<html lang="es"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actuadores - Sistema de Monitoreo de Invernadero</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&amp;display=swap" rel="stylesheet">
+    <style>
+        /* Variables */
+        :root {
+            --color-primary: #4CAF50;
+            --color-primary-dark: #2E7D32;
+            --color-primary-light: #81C784;
+            --color-background: #F5F5F5;
+            --color-white: #FFFFFF;
+            --color-border: #E0E0E0;
+            --color-sidebar: #8B6F47;
+            --color-sidebar-hover: #9E7B4F;
+            --color-text: #333333;
+            --color-text-light: #666666;
+            --color-error: #F44336;
+            --color-success: #4CAF50;
+            --color-inactive: #9E9E9E;
+            --color-warning: #FF9800;
+            --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
+            --border-radius: 8px;
+            --sidebar-width: 250px;
+            --header-height: 60px;
+        }
+
+        /* Reset y estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-text);
+            display: grid;
+            grid-template-areas:
+                "sidebar header"
+                "sidebar main";
+            grid-template-columns: var(--sidebar-width) 1fr;
+            grid-template-rows: var(--header-height) 1fr;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            grid-area: header;
+            background-color: var(--color-white);
+            box-shadow: var(--shadow-sm);
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-title h1 {
+            color: var(--color-primary-dark);
+            font-size: 20px;
+            margin-left: 10px;
+        }
+
+        .logo {
+            width: 32px;
+            height: 32px;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--color-primary);
+        }
+
+        .logout-btn {
+            background-color: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .logout-btn:hover {
+            opacity: 0.8;
+        }
+
+        /* Sidebar */
+        aside {
+            grid-area: sidebar;
+            background-color: var(--color-white);
+            box-shadow: var(--shadow-sm);
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            width: var(--sidebar-width);
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            padding: 0 20px 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .sidebar-header .logo {
+            width: 40px;
+            height: 40px;
+        }
+
+        .sidebar-header h2 {
+            color: var(--color-primary-dark);
+            font-size: 18px;
+            margin-left: 10px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 5px;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: var(--color-text);
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-menu a:hover {
+            background-color: rgba(139, 111, 71, 0.1);
+            color: var(--color-sidebar);
+        }
+
+        .sidebar-menu a.active {
+            background-color: rgba(139, 111, 71, 0.15);
+            color: var(--color-sidebar);
+            border-left: 3px solid var(--color-sidebar);
+            font-weight: 500;
+        }
+
+        .sidebar-menu .icon {
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Main Content */
+        main {
+            grid-area: main;
+            padding: 20px;
+        }
+
+        .section-title {
+            color: var(--color-primary-dark);
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        /* Mensaje de éxito/error */
+        .message {
+            padding: 12px 16px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            display: none;
+            font-size: 14px;
+            font-weight: 500;
+            align-items: center;
+        }
+
+        .message.success {
+            background-color: rgba(76, 175, 80, 0.1);
+            color: var(--color-success);
+            border: 1px solid rgba(76, 175, 80, 0.2);
+            display: flex;
+        }
+
+        .message.error {
+            background-color: rgba(244, 67, 54, 0.1);
+            color: var(--color-error);
+            border: 1px solid rgba(244, 67, 54, 0.2);
+            display: flex;
+        }
+
+        .message .icon {
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Botones */
+        .btn {
+            border: none;
+            border-radius: var(--border-radius);
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.8;
+        }
+
+        .btn-secondary {
+            background-color: var(--color-border);
+            color: var(--color-text);
+        }
+
+        .btn-secondary:hover {
+            background-color: #D5D5D5;
+        }
+
+        .btn-toggle {
+            padding: 6px 12px;
+            font-size: 12px;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .btn-toggle.active {
+            background-color: var(--color-primary);
+            color: white;
+        }
+
+        .btn-toggle.inactive {
+            background-color: var(--color-inactive);
+            color: white;
+        }
+
+        .btn .icon {
+            width: 16px;
+            height: 16px;
+            margin-right: 6px;
+        }
+
+        /* Acciones de contenedor */
+        .actions-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        /* Grid de tarjetas */
+        .actuator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Tarjeta de actuador */
+        .actuator-card {
+            background-color: var(--color-white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            padding: 20px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .actuator-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .actuator-card.selected {
+            border: 2px solid var(--color-primary);
+        }
+
+        .actuator-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .actuator-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--color-primary-dark);
+        }
+
+        .actuator-id {
+            font-size: 12px;
+            color: var(--color-text-light);
+            background-color: var(--color-background);
+            padding: 4px 8px;
+            border-radius: 12px;
+        }
+
+        .actuator-content {
+            margin-bottom: 15px;
+        }
+
+        .actuator-item {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        .actuator-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-light);
+            width: 80px;
+        }
+
+        .actuator-value {
+            font-size: 14px;
+            color: var(--color-text);
+        }
+
+        .actuator-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 32px;
+            height: 32px;
+            color: var(--color-primary);
+        }
+
+        /* Panel de detalles */
+        .details-panel {
+            background-color: var(--color-white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .details-panel.active {
+            display: block;
+        }
+
+        .details-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .details-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--color-primary-dark);
+        }
+
+        .details-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--color-text-light);
+        }
+
+        .details-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .details-item {
+            margin-bottom: 15px;
+        }
+
+        .details-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-light);
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .details-value {
+            font-size: 16px;
+            color: var(--color-text);
+        }
+
+        /* Modales */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background-color: var(--color-white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 500px;
+            padding: 24px;
+            position: relative;
+            transform: translateY(-20px);
+            transition: transform 0.3s;
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            color: var(--color-primary-dark);
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--color-text-light);
+            transition: color 0.3s;
+        }
+
+        .modal-close:hover {
+            color: var(--color-text);
+        }
+
+        /* Formulario */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--color-text);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            font-size: 14px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--color-primary-light);
+            box-shadow: 0 0 0 2px rgba(129, 199, 132, 0.2);
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        /* Iconos de tipo de actuador */
+        .type-icon {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        /* Overlay para móviles */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            body {
+                grid-template-columns: 0 1fr;
+            }
+
+            aside {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                z-index: 1000;
+            }
+
+            aside.active {
+                transform: translateX(0);
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+            }
+
+            .overlay.active {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .actuator-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal {
+                width: 90%;
+            }
+
+            .details-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside id="sidebar">
+        <div class="sidebar-header">
+            <svg class="logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L4 6V18L12 22L20 18V6L12 2Z" stroke="#4CAF50" stroke-width="2" fill="#E8F5E9"></path>
+                <path d="M12 6C13.1046 6 14 5.10457 14 4C14 2.89543 13.1046 2 12 2C10.8954 2 10 2.89543 10 4C10 5.10457 10.8954 6 12 6Z" fill="#4CAF50"></path>
+                <path d="M12 22V16" stroke="#4CAF50" stroke-width="2"></path>
+                <path d="M8 9L16 13" stroke="#4CAF50" stroke-width="2"></path>
+                <path d="M16 9L8 13" stroke="#4CAF50" stroke-width="2"></path>
+            </svg>
+            <h2>Invernadero</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="dashboard.html">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 13H11V3H3V13ZM3 21H11V15H3V21ZM13 21H21V11H13V21ZM13 3V9H21V3H13Z" fill="currentColor"></path>
+                    </svg>
+                    Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="bandejas.html">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM17 13H13V17H11V13H7V11H11V7H13V11H17V13Z" fill="currentColor"></path>
+                    </svg>
+                    Bandejas
+                </a>
+            </li>
+            <li>
+                <a href="reportes_semanales.html">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM9 17H7V10H9V17ZM13 17H11V7H13V17ZM17 17H15V13H17V17Z" fill="currentColor"></path>
+                    </svg>
+                    Reportes Semanales
+                </a>
+            </li>
+            <li>
+                <a href="bitacora_historica.html">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 3C8.03 3 4 7.03 4 12H1L4.89 15.89L4.96 16.03L9 12H6C6 8.13 9.13 5 13 5C16.87 5 20 8.13 20 12C20 15.87 16.87 19 13 19C11.07 19 9.32 18.21 8.06 16.94L6.64 18.36C8.27 19.99 10.51 21 13 21C17.97 21 22 16.97 22 12C22 7.03 17.97 3 13 3ZM12 8V13L16.28 15.54L17 14.33L13.5 12.25V8H12Z" fill="currentColor"></path>
+                    </svg>
+                    Bitácora Histórica
+                </a>
+            </li>
+            <li>
+                <a href="gestion_usuarios.html">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="currentColor"></path>
+                    </svg>
+                    Gestión de Usuarios
+                </a>
+            </li>
+            <li>
+                <a href="actuadores.html" class="active">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 9H9V15H15V9ZM13 13H11V11H13V13ZM21 11V9H19V7C19 5.9 18.1 5 17 5H15V3H13V5H11V3H9V5H7C5.9 5 5 5.9 5 7V9H3V11H5V13H3V15H5V17C5 18.1 5.9 19 7 19H9V21H11V19H13V21H15V19H17C18.1 19 19 18.1 19 17V15H21V13H19V11H21ZM17 17H7V7H17V17Z" fill="currentColor"></path>
+                    </svg>
+                    Actuadores
+                </a>
+            </li>
+            <li>
+                <a href="sensores.html">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM7 13H17V11H7" fill="currentColor"></path>
+                    </svg>
+                    Sensores
+                </a>
+            </li>
+            <li>
+                <a href="configuracion.html">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19.14 12.94C19.18 12.64 19.2 12.33 19.2 12C19.2 11.68 19.18 11.36 19.13 11.06L21.16 9.48C21.34 9.34 21.39 9.07 21.28 8.87L19.36 5.55C19.24 5.33 18.99 5.26 18.77 5.33L16.38 6.29C15.88 5.91 15.35 5.59 14.76 5.35L14.4 2.81C14.36 2.57 14.16 2.4 13.92 2.4H10.08C9.84 2.4 9.65 2.57 9.61 2.81L9.25 5.35C8.66 5.59 8.12 5.92 7.63 6.29L5.24 5.33C5.02 5.25 4.77 5.33 4.65 5.55L2.74 8.87C2.62 9.08 2.66 9.34 2.86 9.48L4.89 11.06C4.84 11.36 4.8 11.69 4.8 12C4.8 12.31 4.82 12.64 4.87 12.94L2.84 14.52C2.66 14.66 2.61 14.93 2.72 15.13L4.64 18.45C4.76 18.67 5.01 18.74 5.23 18.67L7.62 17.71C8.12 18.09 8.65 18.41 9.24 18.65L9.6 21.19C9.65 21.43 9.84 21.6 10.08 21.6H13.92C14.16 21.6 14.36 21.43 14.39 21.19L14.75 18.65C15.34 18.41 15.88 18.09 16.37 17.71L18.76 18.67C18.98 18.75 19.23 18.67 19.35 18.45L21.27 15.13C21.39 14.91 21.34 14.66 21.15 14.52L19.14 12.94ZM12 15.6C10.02 15.6 8.4 13.98 8.4 12C8.4 10.02 10.02 8.4 12 8.4C13.98 8.4 15.6 10.02 15.6 12C15.6 13.98 13.98 15.6 12 15.6Z" fill="currentColor"></path>
+                    </svg>
+                    Configuración
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- Header -->
+    <header>
+        <button id="menuToggle" class="menu-toggle">☰</button>
+        <div class="header-title">
+            <svg class="logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L4 6V18L12 22L20 18V6L12 2Z" stroke="#4CAF50" stroke-width="2" fill="#E8F5E9"></path>
+                <path d="M12 6C13.1046 6 14 5.10457 14 4C14 2.89543 13.1046 2 12 2C10.8954 2 10 2.89543 10 4C10 5.10457 10.8954 6 12 6Z" fill="#4CAF50"></path>
+                <path d="M12 22V16" stroke="#4CAF50" stroke-width="2"></path>
+                <path d="M8 9L16 13" stroke="#4CAF50" stroke-width="2"></path>
+                <path d="M16 9L8 13" stroke="#4CAF50" stroke-width="2"></path>
+            </svg>
+            <h1>Actuadores</h1>
+        </div>
+        <button class="logout-btn"><a href="login.html">Cerrar Sesión</a></button>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Mensaje de éxito/error -->
+        <div class="message" id="message">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" fill="#4CAF50"></path>
+            </svg>
+            <span id="messageText">Actuador creado correctamente.</span>
+        </div>
+
+        <!-- Acciones de contenedor -->
+        <div class="actions-container">
+            <h2 class="section-title">Lista de Actuadores</h2>
+            <button class="btn btn-primary" id="addActuatorBtn">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z" fill="white"></path>
+                </svg>
+                Agregar Actuador
+            </button>
+        </div>
+
+        <!-- Grid de tarjetas de actuadores -->
+        <div class="actuator-grid" id="actuatorGrid"><div class="actuator-card" data-id="A001" data-bandeja="B001">
+                    <div class="actuator-header">
+                        <h3 class="actuator-title"><svg class="type-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM7.5 12C7.5 9.51 9.51 7.5 12 7.5C14.49 7.5 16.5 9.51 16.5 12C16.5 14.49 14.49 16.5 12 16.5C9.51 16.5 7.5 14.49 7.5 12ZM12 15C13.66 15 15 13.66 15 12C15 10.34 13.66 9 12 9C10.34 9 9 10.34 9 12C9 13.66 10.34 15 12 15Z" fill="#4CAF50"></path>
+                    </svg> Rociador</h3>
+                        <span class="actuator-id">ID: A001</span>
+                    </div>
+                    <div class="actuator-content">
+                        <div class="actuator-item">
+                            <span class="actuator-label">Bandeja:</span>
+                            <span class="actuator-value">B001</span>
+                        </div>
+                        <div class="actuator-item">
+                            <span class="actuator-label">Estado:</span>
+                            <span class="actuator-value">Activo</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-toggle active" data-id="A001">Desactivar</button>
+                </div><div class="actuator-card" data-id="A002" data-bandeja="B002">
+                    <div class="actuator-header">
+                        <h3 class="actuator-title"><svg class="type-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 12C10.9 12 10 11.1 10 10C10 8.9 10.9 8 12 8C13.1 8 14 8.9 14 10C14 11.1 13.1 12 12 12ZM18 10C18 6.7 15.3 4 12 4C8.7 4 6 6.7 6 10C6 12.2 7.2 14.1 9 15.2L10 13.5C8.8 12.8 8 11.5 8 10C8 7.8 9.8 6 12 6C14.2 6 16 7.8 16 10C16 11.5 15.2 12.8 14 13.5L15 15.2C16.8 14.1 18 12.2 18 10ZM12 22C14.2 22 16.2 20.8 17.2 19H6.8C7.8 20.8 9.8 22 12 22Z" fill="#4CAF50"></path>
+                    </svg> Ventilador</h3>
+                        <span class="actuator-id">ID: A002</span>
+                    </div>
+                    <div class="actuator-content">
+                        <div class="actuator-item">
+                            <span class="actuator-label">Bandeja:</span>
+                            <span class="actuator-value">B002</span>
+                        </div>
+                        <div class="actuator-item">
+                            <span class="actuator-label">Estado:</span>
+                            <span class="actuator-value">Inactivo</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-toggle inactive" data-id="A002">Activar</button>
+                </div><div class="actuator-card" data-id="A003" data-bandeja="B001">
+                    <div class="actuator-header">
+                        <h3 class="actuator-title"><svg class="type-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 3C7.03 3 3 7.03 3 12C3 16.97 7.03 21 12 21C16.97 21 21 16.97 21 12C21 7.03 16.97 3 12 3ZM12 19C8.14 19 5 15.86 5 12C5 8.14 8.14 5 12 5C15.86 5 19 8.14 19 12C19 15.86 15.86 19 12 19ZM12 7C9.24 7 7 9.24 7 12C7 14.76 9.24 17 12 17C14.76 17 17 14.76 17 12C17 9.24 14.76 7 12 7Z" fill="#4CAF50"></path>
+                    </svg> Lampara</h3>
+                        <span class="actuator-id">ID: A003</span>
+                    </div>
+                    <div class="actuator-content">
+                        <div class="actuator-item">
+                            <span class="actuator-label">Bandeja:</span>
+                            <span class="actuator-value">B001</span>
+                        </div>
+                        <div class="actuator-item">
+                            <span class="actuator-label">Estado:</span>
+                            <span class="actuator-value">Activo</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-toggle active" data-id="A003">Desactivar</button>
+                </div><div class="actuator-card" data-id="A004" data-bandeja="B003">
+                    <div class="actuator-header">
+                        <h3 class="actuator-title"><svg class="type-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM7.5 12C7.5 9.51 9.51 7.5 12 7.5C14.49 7.5 16.5 9.51 16.5 12C16.5 14.49 14.49 16.5 12 16.5C9.51 16.5 7.5 14.49 7.5 12ZM12 15C13.66 15 15 13.66 15 12C15 10.34 13.66 9 12 9C10.34 9 9 10.34 9 12C9 13.66 10.34 15 12 15Z" fill="#4CAF50"></path>
+                    </svg> Rociador</h3>
+                        <span class="actuator-id">ID: A004</span>
+                    </div>
+                    <div class="actuator-content">
+                        <div class="actuator-item">
+                            <span class="actuator-label">Bandeja:</span>
+                            <span class="actuator-value">B003</span>
+                        </div>
+                        <div class="actuator-item">
+                            <span class="actuator-label">Estado:</span>
+                            <span class="actuator-value">Inactivo</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-toggle inactive" data-id="A004">Activar</button>
+                </div><div class="actuator-card" data-id="A005" data-bandeja="B004">
+                    <div class="actuator-header">
+                        <h3 class="actuator-title"><svg class="type-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 12C10.9 12 10 11.1 10 10C10 8.9 10.9 8 12 8C13.1 8 14 8.9 14 10C14 11.1 13.1 12 12 12ZM18 10C18 6.7 15.3 4 12 4C8.7 4 6 6.7 6 10C6 12.2 7.2 14.1 9 15.2L10 13.5C8.8 12.8 8 11.5 8 10C8 7.8 9.8 6 12 6C14.2 6 16 7.8 16 10C16 11.5 15.2 12.8 14 13.5L15 15.2C16.8 14.1 18 12.2 18 10ZM12 22C14.2 22 16.2 20.8 17.2 19H6.8C7.8 20.8 9.8 22 12 22Z" fill="#4CAF50"></path>
+                    </svg> Ventilador</h3>
+                        <span class="actuator-id">ID: A005</span>
+                    </div>
+                    <div class="actuator-content">
+                        <div class="actuator-item">
+                            <span class="actuator-label">Bandeja:</span>
+                            <span class="actuator-value">B004</span>
+                        </div>
+                        <div class="actuator-item">
+                            <span class="actuator-label">Estado:</span>
+                            <span class="actuator-value">Activo</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-toggle active" data-id="A005">Desactivar</button>
+                </div><div class="actuator-card" data-id="A006" data-bandeja="B005">
+                    <div class="actuator-header">
+                        <h3 class="actuator-title"><svg class="type-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 3C7.03 3 3 7.03 3 12C3 16.97 7.03 21 12 21C16.97 21 21 16.97 21 12C21 7.03 16.97 3 12 3ZM12 19C8.14 19 5 15.86 5 12C5 8.14 8.14 5 12 5C15.86 5 19 8.14 19 12C19 15.86 15.86 19 12 19ZM12 7C9.24 7 7 9.24 7 12C7 14.76 9.24 17 12 17C14.76 17 17 14.76 17 12C17 9.24 14.76 7 12 7Z" fill="#4CAF50"></path>
+                    </svg> Lampara</h3>
+                        <span class="actuator-id">ID: A006</span>
+                    </div>
+                    <div class="actuator-content">
+                        <div class="actuator-item">
+                            <span class="actuator-label">Bandeja:</span>
+                            <span class="actuator-value">B005</span>
+                        </div>
+                        <div class="actuator-item">
+                            <span class="actuator-label">Estado:</span>
+                            <span class="actuator-value">Inactivo</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-toggle inactive" data-id="A006">Activar</button>
+                </div></div>
+
+        <!-- Panel de detalles de bandeja -->
+        <div class="details-panel" id="detailsPanel">
+            <div class="details-header">
+                <h3 class="details-title">Detalles de la Bandeja</h3>
+                <button class="details-close" id="closeDetails">×</button>
+            </div>
+            <div class="details-content">
+                <div class="details-item">
+                    <span class="details-label">ID Bandeja</span>
+                    <span class="details-value" id="detailsBandejaid">B001</span>
+                </div>
+                <div class="details-item">
+                    <span class="details-label">Nombre</span>
+                    <span class="details-value" id="detailsNombre">Bandeja de Tomates</span>
+                </div>
+                <div class="details-item">
+                    <span class="details-label">Ubicación</span>
+                    <span class="details-value" id="detailsUbicacion">Sector A, Fila 2</span>
+                </div>
+                <div class="details-item">
+                    <span class="details-label">Tipo de Semilla</span>
+                    <span class="details-value" id="detailsSemilla">Tomate Cherry</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Agregar Actuador -->
+    <div class="modal-overlay" id="addActuatorModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Agregar Actuador</h3>
+                <button class="modal-close" id="closeAddModal">×</button>
+            </div>
+            <form id="addActuatorForm">
+                <div class="form-group">
+                    <label for="addBandeja">ID Bandeja</label>
+                    <select class="form-control" id="addBandeja" required="">
+                        <option value="">Seleccionar bandeja</option>
+                        <option value="B001">B001 - Bandeja de Tomates</option>
+                        <option value="B002">B002 - Bandeja de Lechugas</option>
+                        <option value="B003">B003 - Bandeja de Pimientos</option>
+                        <option value="B004">B004 - Bandeja de Zanahorias</option>
+                        <option value="B005">B005 - Bandeja de Fresas</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="addTipo">Tipo</label>
+                    <select class="form-control" id="addTipo" required="">
+                        <option value="">Seleccionar tipo</option>
+                        <option value="rociador">Rociador</option>
+                        <option value="ventilador">Ventilador</option>
+                        <option value="lampara">Lámpara</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="addEstado">Estado</label>
+                    <select class="form-control" id="addEstado" required="">
+                        <option value="">Seleccionar estado</option>
+                        <option value="activo">Activo</option>
+                        <option value="inactivo">Inactivo</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelAddBtn">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="createActuatorBtn">Crear Actuador</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Overlay para móviles -->
+    <div class="overlay" id="overlay"></div>
+
+    <script>
+        // Datos de muestra
+        const actuators = [
+            { id: 'A001', bandeja: 'B001', tipo: 'rociador', estado: 'activo' },
+            { id: 'A002', bandeja: 'B002', tipo: 'ventilador', estado: 'inactivo' },
+            { id: 'A003', bandeja: 'B001', tipo: 'lampara', estado: 'activo' },
+            { id: 'A004', bandeja: 'B003', tipo: 'rociador', estado: 'inactivo' },
+            { id: 'A005', bandeja: 'B004', tipo: 'ventilador', estado: 'activo' },
+            { id: 'A006', bandeja: 'B005', tipo: 'lampara', estado: 'inactivo' }
+        ];
+
+        const bandejas = [
+            { id: 'B001', nombre: 'Bandeja de Tomates', ubicacion: 'Sector A, Fila 2', semilla: 'Tomate Cherry' },
+            { id: 'B002', nombre: 'Bandeja de Lechugas', ubicacion: 'Sector A, Fila 3', semilla: 'Lechuga Romana' },
+            { id: 'B003', nombre: 'Bandeja de Pimientos', ubicacion: 'Sector B, Fila 1', semilla: 'Pimiento Verde' },
+            { id: 'B004', nombre: 'Bandeja de Zanahorias', ubicacion: 'Sector B, Fila 2', semilla: 'Zanahoria Baby' },
+            { id: 'B005', nombre: 'Bandeja de Fresas', ubicacion: 'Sector C, Fila 1', semilla: 'Fresa Silvestre' }
+        ];
+
+        // Función para obtener el ícono según el tipo de actuador
+        function getActuatorIcon(tipo) {
+            switch (tipo) {
+                case 'rociador':
+                    return `<svg class="type-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM7.5 12C7.5 9.51 9.51 7.5 12 7.5C14.49 7.5 16.5 9.51 16.5 12C16.5 14.49 14.49 16.5 12 16.5C9.51 16.5 7.5 14.49 7.5 12ZM12 15C13.66 15 15 13.66 15 12C15 10.34 13.66 9 12 9C10.34 9 9 10.34 9 12C9 13.66 10.34 15 12 15Z" fill="#4CAF50"/>
+                    </svg>`;
+                case 'ventilador':
+                    return `<svg class="type-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 12C10.9 12 10 11.1 10 10C10 8.9 10.9 8 12 8C13.1 8 14 8.9 14 10C14 11.1 13.1 12 12 12ZM18 10C18 6.7 15.3 4 12 4C8.7 4 6 6.7 6 10C6 12.2 7.2 14.1 9 15.2L10 13.5C8.8 12.8 8 11.5 8 10C8 7.8 9.8 6 12 6C14.2 6 16 7.8 16 10C16 11.5 15.2 12.8 14 13.5L15 15.2C16.8 14.1 18 12.2 18 10ZM12 22C14.2 22 16.2 20.8 17.2 19H6.8C7.8 20.8 9.8 22 12 22Z" fill="#4CAF50"/>
+                    </svg>`;
+                case 'lampara':
+                    return `<svg class="type-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 3C7.03 3 3 7.03 3 12C3 16.97 7.03 21 12 21C16.97 21 21 16.97 21 12C21 7.03 16.97 3 12 3ZM12 19C8.14 19 5 15.86 5 12C5 8.14 8.14 5 12 5C15.86 5 19 8.14 19 12C19 15.86 15.86 19 12 19ZM12 7C9.24 7 7 9.24 7 12C7 14.76 9.24 17 12 17C14.76 17 17 14.76 17 12C17 9.24 14.76 7 12 7Z" fill="#4CAF50"/>
+                    </svg>`;
+                default:
+                    return '';
+            }
+        }
+
+        // Función para renderizar las tarjetas de actuadores
+        function renderActuators() {
+            const actuatorGrid = document.getElementById('actuatorGrid');
+            actuatorGrid.innerHTML = '';
+
+            actuators.forEach(actuator => {
+                const card = document.createElement('div');
+                card.className = 'actuator-card';
+                card.dataset.id = actuator.id;
+                card.dataset.bandeja = actuator.bandeja;
+
+                const buttonClass = actuator.estado === 'activo' ? 'active' : 'inactive';
+                const buttonText = actuator.estado === 'activo' ? 'Desactivar' : 'Activar';
+
+                card.innerHTML = `
+                    <div class="actuator-header">
+                        <h3 class="actuator-title">${getActuatorIcon(actuator.tipo)} ${actuator.tipo.charAt(0).toUpperCase() + actuator.tipo.slice(1)}</h3>
+                        <span class="actuator-id">ID: ${actuator.id}</span>
+                    </div>
+                    <div class="actuator-content">
+                        <div class="actuator-item">
+                            <span class="actuator-label">Bandeja:</span>
+                            <span class="actuator-value">${actuator.bandeja}</span>
+                        </div>
+                        <div class="actuator-item">
+                            <span class="actuator-label">Estado:</span>
+                            <span class="actuator-value">${actuator.estado.charAt(0).toUpperCase() + actuator.estado.slice(1)}</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-toggle ${buttonClass}" data-id="${actuator.id}">${buttonText}</button>
+                `;
+
+                actuatorGrid.appendChild(card);
+
+                // Evento para mostrar detalles al hacer clic en la tarjeta
+                card.addEventListener('click', function(e) {
+                    // No mostrar detalles si se hizo clic en el botón
+                    if (e.target.classList.contains('btn-toggle')) {
+                        return;
+                    }
+                    
+                    const bandejaId = this.dataset.bandeja;
+                    showBandejaDetails(bandejaId);
+                    
+                    // Marcar la tarjeta como seleccionada
+                    document.querySelectorAll('.actuator-card').forEach(c => {
+                        c.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                });
+            });
+
+            // Agregar eventos a los botones de toggle
+            document.querySelectorAll('.btn-toggle').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Evitar que se propague al evento de clic de la tarjeta
+                    toggleActuatorState(this.dataset.id);
+                });
+            });
+        }
+
+        // Función para mostrar detalles de la bandeja
+        function showBandejaDetails(bandejaId) {
+            const bandeja = bandejas.find(b => b.id === bandejaId);
+            if (bandeja) {
+                document.getElementById('detailsBandejaid').textContent = bandeja.id;
+                document.getElementById('detailsNombre').textContent = bandeja.nombre;
+                document.getElementById('detailsUbicacion').textContent = bandeja.ubicacion;
+                document.getElementById('detailsSemilla').textContent = bandeja.semilla;
+                document.getElementById('detailsPanel').classList.add('active');
+            }
+        }
+
+        // Función para cambiar el estado de un actuador
+        function toggleActuatorState(actuatorId) {
+            const actuator = actuators.find(a => a.id === actuatorId);
+            if (actuator) {
+                actuator.estado = actuator.estado === 'activo' ? 'inactivo' : 'activo';
+                renderActuators();
+                
+                const message = `Actuador ${actuatorId} ${actuator.estado === 'activo' ? 'activado' : 'desactivado'} correctamente.`;
+                showMessage(message, 'success');
+            }
+        }
+
+        // Toggle del menú en móviles
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+
+        menuToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        });
+
+        overlay.addEventListener('click', function() {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        // Cerrar panel de detalles
+        document.getElementById('closeDetails').addEventListener('click', function() {
+            document.getElementById('detailsPanel').classList.remove('active');
+            document.querySelectorAll('.actuator-card').forEach(c => {
+                c.classList.remove('selected');
+            });
+        });
+
+        // Funciones para mostrar mensajes
+        const message = document.getElementById('message');
+        const messageText = document.getElementById('messageText');
+
+        function showMessage(text, type) {
+            messageText.textContent = text;
+            message.className = `message ${type}`;
+            message.style.display = 'flex';
+            
+            // Ocultar el mensaje después de 3 segundos
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 3000);
+        }
+
+        // Modal Agregar Actuador
+        const addActuatorBtn = document.getElementById('addActuatorBtn');
+        const addActuatorModal = document.getElementById('addActuatorModal');
+        const closeAddModal = document.getElementById('closeAddModal');
+        const cancelAddBtn = document.getElementById('cancelAddBtn');
+        const createActuatorBtn = document.getElementById('createActuatorBtn');
+        const addActuatorForm = document.getElementById('addActuatorForm');
+
+        addActuatorBtn.addEventListener('click', function() {
+            addActuatorModal.classList.add('active');
+        });
+
+        function closeAddActuatorModal() {
+            addActuatorModal.classList.remove('active');
+            addActuatorForm.reset();
+        }
+
+        closeAddModal.addEventListener('click', closeAddActuatorModal);
+        cancelAddBtn.addEventListener('click', closeAddActuatorModal);
+
+        createActuatorBtn.addEventListener('click', function() {
+            const bandeja = document.getElementById('addBandeja').value;
+            const tipo = document.getElementById('addTipo').value;
+            const estado = document.getElementById('addEstado').value;
+
+            if (!bandeja || !tipo || !estado) {
+                showMessage('Por favor complete todos los campos.', 'error');
+                return;
+            }
+
+            // Simulación de creación de actuador
+            const newId = 'A' + (actuators.length + 1).toString().padStart(3, '0');
+            actuators.push({
+                id: newId,
+                bandeja: bandeja,
+                tipo: tipo,
+                estado: estado
+            });
+
+            renderActuators();
+            showMessage('Actuador creado correctamente.', 'success');
+            closeAddActuatorModal();
+        });
+
+        // Inicializar la página
+        renderActuators();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'945f4d2a9794ac49',t:'MTc0ODI4Mzc4My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border: none; visibility: hidden;"></iframe>
+</body></html>
