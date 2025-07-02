@@ -34,13 +34,13 @@
   /*font-family: 'Roboto', sans-serif;*/
 }
 
-body {
+main {
   background-color: var(--color-background);
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
   padding: 0px;
+  width: auto;
 }
 
 h1 {

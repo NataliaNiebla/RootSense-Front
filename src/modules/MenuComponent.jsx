@@ -29,6 +29,7 @@ function MenuComponents() {
             icon: "SettingOutlined",
             roles: [""],
         },
+    ];
 
     useEffect(() => {
         setTimeout(() => {

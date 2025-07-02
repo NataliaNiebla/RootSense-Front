@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route, Navigate} from 'react-router-dom';
 import Sidebar from "../components/Sidebar";
 
-import Dashboard from "../modules/Dashboard/Dashboard";
+import Dashboard from "../modules/dashboard/Dashboard";
 import Bandejas from "../modules/bandejas/Bandejas";
 //import Reportes from "../modules/Reportes/Reportes";
 //import Bitacora from "../modules/Bitacora/Bitacora";

@@ -71,8 +71,8 @@ const Dashboard = () => {
     return (
         <div className="dashboard">
             <Header title="Dashboard" />
-            
             <main>
+            
                 {/* Cards */}
                 <section className="cards-container">
                   {/* Reutiliza una Card */}
