@@ -1,0 +1,130 @@
+/* BitacoraFilters Styles */
+.bitacora-filters-card {
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    background-color: var(--color-white);
+}
+
+.bitacora-filters-card .ant-card-head {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    border-bottom: none;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    padding: 0rem 1rem;
+}
+
+.filter-title {
+    display: flex;
+    align-items: center;  
+    gap: 1rem;
+    color: var(--color-white);
+}
+
+.filter-icon {
+    font-size: 1rem;
+}
+
+/*.bitacora-filters-form {
+  
+}*/
+
+/*.bitacora-filters-form .ant-form-item {
+    margin-bottom: 16px;
+}*/
+
+.bitacora-filters-form .ant-form-item-label > label {
+    font-weight: 500;
+    color: var(--color-text);
+}
+
+/* Estilos específicos para los inputs */
+.bitacora-filters-form .ant-picker,
+.bitacora-filters-form .ant-input,
+.bitacora-filters-form .ant-select-selector {
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-border);
+    transition: all 0.3s ease;
+}
+
+.bitacora-filters-form .ant-picker:hover,
+.bitacora-filters-form .ant-input:hover,
+.bitacora-filters-form .ant-select-selector:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-sm);
+}
+
+.bitacora-filters-form .ant-picker-focused,
+.bitacora-filters-form .ant-input:focus,
+.bitacora-filters-form .ant-select-focused .ant-select-selector {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Botones personalizados */
+.bitacora-filters-form .ant-btn {
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.bitacora-filters-form .ant-btn-primary {
+    background: var(--color-primary);
+    color: var(--color-primary-dark);
+    border: none;
+    box-shadow: var(--shadow-sm);
+}
+
+.bitacora-filters-form .ant-btn-primary:hover {
+    background: var(--color-primary-light);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.bitacora-filters-form .ant-btn:not(.ant-btn-primary) {
+    border: 1px solid var(--color-border);
+    background: var(--color-white);
+    color: var(--color-text);
+}
+
+.bitacora-filters-form .ant-btn:not(.ant-btn-primary):hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary-dark);
+    background: var(--color-container);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .bitacora-filters-form .ant-row {
+        margin: 0 -8px;
+    }
+    
+    .bitacora-filters-form .ant-col {
+        padding: 0 8px;
+    }
+    
+    .filter-title {
+        font-size: 14px;
+    }
+}
+
+/* Select options con colores */
+.ant-select-dropdown .ant-select-item-option-content span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Animaciones */
+.bitacora-filters-card {
+    animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,86 @@
+.sidebar {
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-sm);
+  position: fixed; 
+  left: 0; 
+  top: 0;
+  bottom: 0; 
+  z-index: 1000;   /*´posible modificación para que se superponga al contenido */
+  transition: width 0.5s ease-in-out !important;  /*no esta funcionando*/
+}
+
+.sidebar-header {
+  display: flex;  /* Alinea los elementos en una fila */
+  flex-direction: column; /* Cambia a columna para alinear logo y título */
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: .8rem;
+  border-bottom: 1px solid var(--color-border);
+  }
+
+.logo {
+  width: auto;
+  height: auto;
+  transition: all 0.5s ease-in-out !important;   /*nef*/
+}
+
+.icon {
+  width: auto;
+  height: auto;
+  transition: all 0.5s ease-in-out;
+}
+
+.sidebar-menu {
+  font-size: 1rem;
+}
+
+.sidebar-menu .ant-menu-item {
+  margin-bottom: .8rem;
+  padding-left: 1.5rem !important; /* Espaciado izquierdo */
+  transition: background-color 0.5s, color 0.3s, left 0.3s ease-in-out !important;
+}     
+
+/* Hover */
+.sidebar-menu .ant-menu-item:hover {
+  background-color: rgba(139, 111, 71, 0.1) !important;
+  color: var(--color-sidebar) !important;
+  border-radius: 0 !important;
+}
+
+/* Ítem activo (seleccionado) */
+.sidebar-menu .ant-menu-item-selected {
+  background-color: var(--color-sidebar-hover) !important;
+  color: var(--color-sidebar) !important;
+  border-left: .2rem solid var(--color-sidebar);
+  border-radius: 0 !important;
+}
+
+/* Ícono del menú */
+.sidebar-menu .ant-menu-item-icon {
+  margin-right: .5rem;
+}
+
+/* Contenedor del botón de toggle */
+.sidebar-toggle-container {
+  position: absolute;
+  top: 12px;
+  z-index: 1001; /* por encima del sidebar */
+  transition: left 0.3s ease; /* Transición suave para el cambio de posición */
+}
+
+.sidebar-toggle-container.collapsed {
+  left: 80px; /* cuando está colapsado */
+}
+
+.sidebar-toggle-container.expanded {
+  left: 240px; /* cuando está expandido */
+}
+
+/* Botón de colapso */
+.collapse-button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 8px;
+  height: 48px;
+}

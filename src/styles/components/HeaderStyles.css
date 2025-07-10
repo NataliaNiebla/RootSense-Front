@@ -1,0 +1,101 @@
+/* Header */
+header {
+    background-color: var(--color-white); 
+    box-shadow: var(--shadow-sm);
+    padding: .7rem; /* Espaciado interno del header */
+    position: fixed;
+    top: 0; 
+    right: 0;
+    z-index: 999; /* Menor que el sidebar para evitar conflictos */
+    transition: left 0.3s ease; /* Transición suave cuando cambia el sidebar */
+}
+
+/* Header cuando el sidebar está colapsado */
+header.sidebar-collapsed {
+    left: 80px; /* Ancho del sidebar cuando está colapsado */
+}
+
+/* Ajustar el contenido del header cuando el sidebar está colapsado */
+header.sidebar-collapsed .header-general {
+    max-width: none; /* Eliminar el max-width para usar todo el espacio */
+    padding: .5rem 1rem .5rem 2rem; 
+    justify-content: space-between; /* Distribuir elementos en los extremos */
+}
+
+.header-general {
+    display: flex; /* Usar flexbox para alinear elementos */
+    align-items: center; /* Alinear verticalmente los elementos */
+    padding: .5rem 1rem .5rem 2rem; /* Espaciado interno del header */
+    max-width: none; 
+    margin: 0 auto;
+    gap: .5rem; /* Espacio entre los elementos del header */
+}
+
+.icon {
+    width: 75px;
+    height: auto;
+}
+
+.header-title {
+    font-size: 1.5rem;
+    color: var(--color-primary-dark);
+    margin: 0; /* Eliminar margen para evitar desalineación */
+}
+
+.logout-btn {
+    background-color: var(--color-primary-dark);
+    color: white !important;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 1.1rem 1.5rem;
+    font-size: .8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.4s, transform 0.2s;
+    margin-left: auto; /* Mantener el botón en el extremo derecho */
+    box-shadow: var(--shadow-sm);
+}
+
+.logout-btn:hover {
+    opacity: 0.8;
+    color: white !important;
+    background-color: var(--color-primary-light) !important;
+    box-shadow: var(--shadow-md); 
+}
+
+.logout-btn:active {
+    transform: scale(0.98);
+    background-color: var(--color-primary-dark) !important; /* Cambia a verde oscuro al hacer clic */
+
+}
+
+/* Espaciado para evitar que el contenido se oculte debajo del header fijo */
+.content-with-header {
+    margin-top: 80px; /* Ajusta según la altura real del header */
+}
+
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+    header {
+        left: 0 !important; /* En móviles, el header ocupa todo el ancho */
+        padding: .7rem;;
+    }
+    
+    .header-general {
+        padding: 0.5rem 0.5rem 0.5rem 2rem; /* Reducir el padding para móviles */
+        gap: 0.5rem;
+    }
+    
+    .icon {
+        width: 60px;
+    }
+    
+    .header-title {
+        font-size: 1.25rem;
+    }
+    
+    .logout-btn {
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+    }
+}

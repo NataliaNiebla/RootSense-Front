@@ -1,60 +1,45 @@
 import React, { useState } from 'react';
-import '../../styles/ConfigStyles.css';
-import Header from '../../components/Header'; // Asegúrate de que la ruta sea correcta
+import { Form, Input, Button } from 'antd';
+import '../../styles/config/ConfigStyles.css';
+import Header from '../../components/Header';
+import ContentLayout from '../../components/ContentLayout';
+import AuthButton from '../login/AuthButton';
 
 const Configuracion = () => {
-    const [currentPassword, setCurrentPassword] = useState('');
-    const [newPassword, setNewPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const [form] = Form.useForm();
+    const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState({ type: '', text: '', show: false });
 
-    const handlePasswordChange = () => {
-        // Validar campos vacíos
-        if (!currentPassword || !newPassword || !confirmPassword) {
+    const onFinish = (values) => {
+        setLoading(true);
+        console.log('Form values:', values);
+
+        // Simular validación y actualización
+        setTimeout(() => {
+            setLoading(false);
             setMessage({
-                type: 'error',
-                text: 'Por favor complete todos los campos.',
+                type: 'success',
+                text: 'Contraseña actualizada correctamente.',
                 show: true
             });
-            return;
-        }
 
-        // Validar que las contraseñas coincidan
-        if (newPassword !== confirmPassword) {
-            setMessage({
-                type: 'error',
-                text: 'Las contraseñas nuevas no coinciden.',
-                show: true
-            });
-            return;
-        }
+            // Limpiar formulario
+            form.resetFields();
 
-        // Validar longitud mínima
-        if (newPassword.length < 6) {
-            setMessage({
-                type: 'error',
-                text: 'La nueva contraseña debe tener al menos 6 caracteres.',
-                show: true
-            });
-            return;
-        }
+            // Ocultar mensaje después de 3 segundos
+            setTimeout(() => {
+                setMessage({ type: '', text: '', show: false });
+            }, 3000);
+        }, 2000);
+    };
 
-        // Simulación de éxito
+    const onFinishFailed = (errorInfo) => {
+        console.log('Failed:', errorInfo);
         setMessage({
-            type: 'success',
-            text: 'Contraseña actualizada correctamente.',
+            type: 'error',
+            text: 'Por favor complete todos los campos correctamente.',
             show: true
         });
-
-        // Limpiar formulario
-        setCurrentPassword('');
-        setNewPassword('');
-        setConfirmPassword('');
-
-        // Ocultar mensaje después de 3 segundos
-        setTimeout(() => {
-            setMessage({ type: '', text: '', show: false });
-        }, 3000);
     };
 
     const handleLogout = () => {
@@ -67,89 +52,106 @@ const Configuracion = () => {
     return (
         <div className="config-container">
             <Header title="Configuración" />
-            <h2 className="section-title">Configuración de Usuario</h2>
+            
+            <ContentLayout>
+                <h2 className="section-title">Configuración de Usuario</h2>
 
-            {/* Mensaje de éxito/error */}
-            {message.show && (
-                <div className={`message ${message.type}`}>
-                    <svg className="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        {message.type === 'success' ? (
-                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" fill="#4CAF50"/>
-                        ) : (
-                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM11 7H13V13H11V7ZM11 15H13V17H11V15Z" fill="#F44336"/>
-                        )}
-                    </svg>
-                    <span>{message.text}</span>
-                </div>
-            )}
+                {/* Mensaje de éxito/error */}
+                {message.show && (
+                    <div className={`message ${message.type}`}>
+                        <svg className="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            {message.type === 'success' ? (
+                                <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" fill="#4CAF50"/>
+                            ) : (
+                                <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM11 7H13V13H11V7ZM11 15H13V17H11V15Z" fill="#F44336"/>
+                            )}
+                        </svg>
+                        <span>{message.text}</span>
+                    </div>
+                )}
 
             {/* Formulario de cambio de contraseña */}
-            <section className="form-container">
-                <form onSubmit={(e) => e.preventDefault()}>
-                    <div className="form-group">
-                        <label htmlFor="currentPassword">Contraseña Actual</label>
-                        <input
-                            type="password"
-                            className="form-control"
+            <div className="config-form-container">
+                <Form
+                    form={form}
+                    name="password-change"
+                    onFinish={onFinish}
+                    onFinishFailed={onFinishFailed}
+                    className="config-form"
+                    validateTrigger="onSubmit"
+                    layout="vertical"
+                >
+                    <label htmlFor="currentPassword" className="custom-label">Contraseña Actual</label>
+                    <Form.Item
+                        name="currentPassword"
+                        rules={[
+                            { required: true, message: 'Favor de ingresar la contraseña actual' }
+                        ]}
+                    >
+                        <Input.Password
                             id="currentPassword"
-                            value={currentPassword}
-                            onChange={(e) => setCurrentPassword(e.target.value)}
-                            required
+                            placeholder="Ingrese su contraseña actual"
+                            autoComplete="current-password"
+                            className="custom-input"
                         />
-                    </div>
-                    
-                    <div className="form-group">
-                        <label htmlFor="newPassword">Nueva Contraseña</label>
-                        <input
-                            type="password"
-                            className="form-control"
+                    </Form.Item>
+
+                    <label htmlFor="newPassword" className="custom-label">Nueva Contraseña</label>
+                    <Form.Item
+                        name="newPassword"
+                        rules={[
+                            { required: true, message: 'Favor de ingresar la nueva contraseña' },
+                            { min: 6, message: 'La contraseña debe tener al menos 6 caracteres' }
+                        ]}
+                    >
+                        <Input.Password
                             id="newPassword"
-                            value={newPassword}
-                            onChange={(e) => setNewPassword(e.target.value)}
-                            required
-                            minLength="6"
+                            placeholder="Ingrese su nueva contraseña"
+                            autoComplete="new-password"
+                            className="custom-input"
                         />
-                    </div>
-                    
-                    <div className="form-group">
-                        <label htmlFor="confirmPassword">Confirmar Nueva Contraseña</label>
-                        <input
-                            type="password"
-                            className="form-control"
+                    </Form.Item>
+
+                    <label htmlFor="confirmPassword" className="custom-label">Confirmar Nueva Contraseña</label>
+                    <Form.Item
+                        name="confirmPassword"
+                        dependencies={['newPassword']}
+                        rules={[
+                            { required: true, message: 'Favor de confirmar la nueva contraseña' },
+                            ({ getFieldValue }) => ({
+                                validator(_, value) {
+                                    if (!value || getFieldValue('newPassword') === value) {
+                                        return Promise.resolve();
+                                    }
+                                    return Promise.reject(new Error('Las contraseñas no coinciden'));
+                                },
+                            }),
+                        ]}
+                    >
+                        <Input.Password
                             id="confirmPassword"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            required
-                            minLength="6"
+                            placeholder="Confirme su nueva contraseña"
+                            autoComplete="new-password"
+                            className="custom-input"
                         />
-                    </div>
-                    
+                    </Form.Item>
+
                     <div className="form-actions">
-                        <button
-                            type="button"
+                        <Button
+                            type="default"
                             className="btn-secondary"
                             onClick={handleLogout}
                         >
                             Cerrar Sesión
-                        </button>
-                        <button
-                            type="button"
-                            className="btn-primary"
-                            onClick={handlePasswordChange}
-                        >
-                            Cambiar Contraseña
-                        </button>
+                        </Button>
+                        
+                        <Form.Item className="config-button">
+                            <AuthButton loading={loading} text="Cambiar Contraseña" />
+                        </Form.Item>
                     </div>
-                </form>
-            </section>
-
-            {/* Enlace para volver al dashboard */}
-            <div className="back-link">
-                <svg className="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M20 11H7.83L13.42 5.41L12 4L4 12L12 20L13.41 18.59L7.83 13H20V11Z" fill="currentColor"/>
-                </svg>
-                Volver al Dashboard
+                </Form>
             </div>
+            </ContentLayout>
         </div>
     );
 };

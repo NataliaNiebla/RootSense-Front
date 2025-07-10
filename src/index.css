@@ -5,7 +5,7 @@
 
 /* Variables */
 :root {
-  --color-primary: #b4e639;
+  --color-primary: #b7e24c;
   --color-primary-dark: #2f6b1a;
   --color-primary-light: #81C784; 
   --color-background: #FFFFFF;
@@ -36,12 +36,18 @@
 }
 
 main {
-  background-color: var(--color-background);
+  background-color: var(--color) !important;
   display: flex;
   justify-content: center;
-  align-items: center;
+  /*align-items: center;*/
   padding: 0px;
+  margin: 0;
   width: auto;
+}
+
+main > div {
+  width: 100%;
+  max-width: none; /* Ancho máximo del contenido */
 }
 
 h1 {

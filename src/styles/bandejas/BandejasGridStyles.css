@@ -1,0 +1,27 @@
+/* BandejasGrid.css - Estilos para el grid de bandejas */
+
+/* Bandejas Grid */
+.bandejas-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+/* No bandejas message */
+.no-bandejas {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--color-text-light);
+}
+
+.no-bandejas p {
+    margin-bottom: 10px;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .bandejas-grid {
+        grid-template-columns: 1fr;
+    }
+}

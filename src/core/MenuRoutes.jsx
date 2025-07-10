@@ -3,7 +3,7 @@ import { Routes, Route, Navigate} from 'react-router-dom';
 import Sidebar from "../components/Sidebar";
 import { SidebarProvider } from "../context/SidebarContext";
 
-import Dashboard from "../modules/dashboard/Dashboard";
+import Dashboard from "../modules/Dashboard/Dashboard";
 import Bandejas from "../modules/bandejas/Bandejas";
 import Reportes from "../modules/reportes/Reportes";
 import Bitacora from "../modules/bitacora/Bitacora";

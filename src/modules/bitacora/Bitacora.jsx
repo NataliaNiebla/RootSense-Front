@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import '../../styles/BitacoraStyles.css';
+import '../../styles/bitacora/BitacoraStyles.css';
+import '../../styles/bitacora/BitacoraFiltersStyles.css';
+import '../../styles/bitacora/ReportesGridStyles.css';
+import '../../styles/bitacora/AnalysisPanelStyles.css';
 import Header from '../../components/Header'; // Asegúrate de que la ruta sea correcta
+import ContentLayout from '../../components/ContentLayout';
+import BitacoraFilters from './BitacoraFilters';
+import ReportesGrid from './ReportesGrid';
+import AnalysisPanel from './AnalysisPanel';
 
 // Datos de ejemplo - reemplazar con llamada a API
 const reportesEjemplo = [
@@ -124,16 +131,6 @@ const Bitacora = () => {
         setReportes(reportesEjemplo);
     };
 
-    const obtenerClaseCalidad = (calidad) => {
-        const clases = {
-            'excelente': 'quality-excelente',
-            'buena': 'quality-buena',
-            'regular': 'quality-regular',
-            'deficiente': 'quality-deficiente'
-        };
-        return clases[calidad] || 'quality-regular';
-    };
-
     const formatearFecha = (fecha) => {
         return new Date(fecha).toLocaleDateString('es-ES', {
             year: 'numeric',
@@ -143,213 +140,34 @@ const Bitacora = () => {
     };
 
     return (
-        <div>
+        <div className="bitacora-page">
             <Header title="Bitacora" />
-            <h2 className="section-title">Historial de Reportes</h2>
+            
+            <ContentLayout>
+                <h2 className="section-title">Historial de Reportes</h2>
 
-            {/* Formulario de Filtros */}
-            <div className="filter-container">
-                <div className="filter-title">
-                    <span className="icon">🔍</span>
-                    Filtrar Reportes
-                </div>
-                
-                <div className="filter-form">
-                    <div className="form-group">
-                        <label>Fecha Inicio</label>
-                        <input
-                            type="date"
-                            className="form-control"
-                            value={filtros.fechaInicio}
-                            onChange={(e) => handleFiltroChange('fechaInicio', e.target.value)}
-                        />
-                    </div>
-                    
-                    <div className="form-group">
-                        <label>Fecha Fin</label>
-                        <input
-                            type="date"
-                            className="form-control"
-                            value={filtros.fechaFin}
-                            onChange={(e) => handleFiltroChange('fechaFin', e.target.value)}
-                        />
-                    </div>
-                    
-                    <div className="form-group">
-                        <label>Bandeja</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Buscar por bandeja..."
-                            value={filtros.bandeja}
-                            onChange={(e) => handleFiltroChange('bandeja', e.target.value)}
-                        />
-                    </div>
-                    
-                    <div className="form-group">
-                        <label>Tipo de Reporte</label>
-                        <select
-                            className="form-control"
-                            value={filtros.tipoReporte}
-                            onChange={(e) => handleFiltroChange('tipoReporte', e.target.value)}
-                        >
-                            <option value="">Todos los tipos</option>
-                            <option value="Diario">Diario</option>
-                            <option value="Semanal">Semanal</option>
-                            <option value="Mensual">Mensual</option>
-                        </select>
-                    </div>
-                    
-                    <div className="form-group">
-                        <label>Calidad</label>
-                        <select
-                            className="form-control"
-                            value={filtros.calidad}
-                            onChange={(e) => handleFiltroChange('calidad', e.target.value)}
-                        >
-                            <option value="">Todas las calidades</option>
-                            <option value="excelente">Excelente</option>
-                            <option value="buena">Buena</option>
-                            <option value="regular">Regular</option>
-                            <option value="deficiente">Deficiente</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div className="filter-actions">
-                    <button className="btn-reset" onClick={limpiarFiltros}>
-                        Limpiar Filtros
-                    </button>
-                    <button className="btn-filter" onClick={aplicarFiltros}>
-                        <span className="icon">🔍</span>
-                        Aplicar Filtros
-                    </button>
-                </div>
-            </div>
+                {/* Componente de Filtros */}
+                <BitacoraFilters
+                    filtros={filtros}
+                    onFiltroChange={handleFiltroChange}
+                    onAplicarFiltros={aplicarFiltros}
+                    onLimpiarFiltros={limpiarFiltros}
+                />
 
-            {/* Grid de Reportes */}
-            <div className="card-grid">
-                {reportes.map(reporte => (
-                    <div key={reporte.id} className="report-card">
-                        <div className="card-header">
-                            <h3 className="card-title">{reporte.bandeja}</h3>
-                            <span className="card-date">{formatearFecha(reporte.fecha)}</span>
-                        </div>
-                        
-                        <div className="card-body">
-                            <div className="card-info">
-                                <div className="info-item">
-                                    <span className="info-label">Temperatura Promedio</span>
-                                    <span className="info-value">{reporte.temperaturaPromedio}</span>
-                                </div>
-                                <div className="info-item">
-                                    <span className="info-label">Humedad Promedio</span>
-                                    <span className="info-value">{reporte.humedadPromedio}</span>
-                                </div>
-                                <div className="info-item">
-                                    <span className="info-label">pH Promedio</span>
-                                    <span className="info-value">{reporte.phPromedio}</span>
-                                </div>
-                                <div className="info-item">
-                                    <span className="info-label">Calidad</span>
-                                    <span className={`quality-badge ${obtenerClaseCalidad(reporte.calidad)}`}>
-                                        {reporte.calidad.charAt(0).toUpperCase() + reporte.calidad.slice(1)}
-                                    </span>
-                                </div>
-                            </div>
-                            
-                            {reporte.observaciones && (
-                                <div className="info-item">
-                                    <span className="info-label">Observaciones</span>
-                                    <p>{reporte.observaciones}</p>
-                                </div>
-                            )}
-                        </div>
-                        
-                        <div className="card-footer">
-                            <button 
-                                className="btn-analysis"
-                                onClick={() => setAnalisisActivo(reporte.id)}
-                            >
-                                <span className="icon">🤖</span>
-                                Ver Análisis IA
-                            </button>
-                        </div>
-                    </div>
-                ))}
-            </div>
+                {/* Grid de Reportes */}
+                <ReportesGrid
+                    reportes={reportes}
+                    onVerAnalisis={setAnalisisActivo}
+                    formatearFecha={formatearFecha}
+                />
 
-            {/* Panel de Análisis IA */}
-            {analisisActivo && (
-                <div className={`analysis-panel ${analisisActivo ? 'active' : ''}`}>
-                    <div className="analysis-header">
-                        <h3 className="analysis-title">Análisis con IA</h3>
-                        <button 
-                            className="analysis-close"
-                            onClick={() => setAnalisisActivo(null)}
-                        >
-                            ✕
-                        </button>
-                    </div>
-                    
-                    <div className="analysis-content">
-                        {(() => {
-                            const reporte = reportes.find(r => r.id === analisisActivo);
-                            if (!reporte) return null;
-                            
-                            return (
-                                <>
-                                    <div className="analysis-section">
-                                        <div className="section-label">
-                                            <span className="icon">📊</span>
-                                            Resumen del Análisis
-                                        </div>
-                                        <div className="section-content">
-                                            <p>{reporte.analisisIA.resumen}</p>
-                                        </div>
-                                    </div>
-                                    
-                                    <div className="analysis-section">
-                                        <div className="section-label">
-                                            <span className="icon">💡</span>
-                                            Recomendaciones
-                                        </div>
-                                        <div className="section-content">
-                                            <ul>
-                                                {reporte.analisisIA.recomendaciones.map((rec, index) => (
-                                                    <li key={index}>{rec}</li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    
-                                    {reporte.analisisIA.alertas.length > 0 && (
-                                        <div className="analysis-section">
-                                            <div className="section-label">
-                                                <span className="icon">⚠️</span>
-                                                Alertas
-                                            </div>
-                                            <div className="section-content">
-                                                <ul>
-                                                    {reporte.analisisIA.alertas.map((alerta, index) => (
-                                                        <li key={index}>{alerta}</li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    )}
-                                </>
-                            );
-                        })()}
-                    </div>
-                </div>
-            )}
-
-            {reportes.length === 0 && (
-                <div className="empty-state">
-                    <p>No se encontraron reportes con los filtros aplicados.</p>
-                </div>
-            )}
+                {/* Panel de Análisis IA */}
+                <AnalysisPanel
+                    visible={!!analisisActivo}
+                    onClose={() => setAnalisisActivo(null)}
+                    reporte={reportes.find(r => r.id === analisisActivo)}
+                />
+            </ContentLayout>
         </div>
     );
 };

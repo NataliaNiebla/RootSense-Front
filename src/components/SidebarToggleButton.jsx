@@ -12,10 +12,8 @@ const SidebarToggleButton = ({ collapsed, onToggle }) => {
           onClick={onToggle}
           style={{
             fontSize: '1.2rem',
-            width: '100%',
-            height: 48,
-            textAlign: 'left',
-            paddingLeft: 16,
+            color: 'var(--color-text)',
+            transition: 'opacity 0.3s, transform 0.2s',
           }}
         />
       </Tooltip>

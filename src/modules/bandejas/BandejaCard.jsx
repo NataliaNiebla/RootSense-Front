@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import '../../styles/bandejas/BandejaCardStyles.css'
+import { ThunderboltFilled } from '@ant-design/icons';
 
 const BandejaCard = ({ bandeja }) => {
     const [showSensors, setShowSensors] = useState(false);
@@ -30,18 +32,18 @@ const BandejaCard = ({ bandeja }) => {
             <div className="bandeja-content">
                 <div className="bandeja-info">
                     <div className="info-row">
-                        <span className="info-label">Tipo de Semilla:</span>
+                        <span className="info-label">Tipo de semilla:</span>
                         <span className="info-value">{bandeja.tipoSemilla}</span>
                     </div>
                     <div className="info-row">
-                        <span className="info-label">Fecha de Inicio:</span>
+                        <span className="info-label">Fecha de inicio:</span>
                         <span className="info-value">{new Date(bandeja.fechaInicio).toLocaleDateString('es-ES')}</span>
                     </div>
                 </div>
 
                 <div className="bandeja-actions">
                     <button className="btn-sensors" onClick={toggleSensors}>
-                        <span className="icon">📊</span>
+                        <ThunderboltFilled className="icon" />
                         {showSensors ? 'Ocultar Sensores' : 'Ver Sensores'}
                     </button>
                 </div>
@@ -57,7 +59,7 @@ const BandejaCard = ({ bandeja }) => {
                                     <div className="sensor-id">{sensor.id}</div>
                                     <div className="sensor-type">{sensor.tipo}</div>
                                     <span className={`sensor-status ${getStatusColor(sensor.estado)}`}>
-                                        {sensor.estado.charAt(0).toUpperCase() + sensor.estado.slice(1)}
+                                        {sensor.estado.charAt(0) + sensor.estado.slice(1)}
                                     </span>
                                 </div>
                             ))

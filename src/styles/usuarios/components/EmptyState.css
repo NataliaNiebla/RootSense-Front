@@ -1,0 +1,14 @@
+/* Estilos para EmptyState Component */
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: var(--color-text-light);
+    background-color: var(--color-white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+}
+
+.empty-state p {
+    margin: 0;
+    font-size: 16px;
+}

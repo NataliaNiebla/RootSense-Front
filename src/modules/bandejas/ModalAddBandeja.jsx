@@ -1,13 +1,13 @@
 // ModalAddBandeja.jsx
 import React from 'react';
-import '../../styles/Modal.css';
+import '../../styles/components/ModalStyles.css'; // Assuming you have a CSS file for modal styles
 
 const ModalAddBandeja = ({ isOpen, onClose, onSave, formValues, onChange }) => {
     if (!isOpen) return null;
 
     return (
         <div className={`modal-overlay ${isOpen ? 'active' : ''}`} onClick={onClose}>
-            <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <div className="modal modal-medium" onClick={(e) => e.stopPropagation()}>
                 <div className="modal-header">
                     <h3 className="modal-title">Agregar Nueva Bandeja</h3>
                     <button className="modal-close" onClick={onClose}>×</button>

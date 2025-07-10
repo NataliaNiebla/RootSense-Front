@@ -1,0 +1,341 @@
+/* Configuración Styles */
+/*.config-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+} 
+
+/* Mensajes */
+.message {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius);
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+    border-left: 4px solid;
+}
+
+.message.success {
+    border-left-color: var(--color-success);
+    background-color: #E8F5E9;
+}
+
+.message.error {
+    border-left-color: var(--color-error);
+    background-color: #FFEBEE;
+}
+
+.message .icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.message span {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text);
+}
+
+/* Contenedor del formulario */
+.form-container {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: var(--shadow-md);
+    max-width: 600px;
+    margin: 0 auto 30px auto;
+}
+
+/* Grupos de formulario */
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text);
+    margin-bottom: 8px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    font-size: 14px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: var(--color-white);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+.form-control:invalid {
+    border-color: var(--color-error);
+}
+
+/* Acciones del formulario */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.btn-primary, .btn-secondary {
+    padding: 12px 24px;
+    border-radius: var(--border-radius);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none;
+    min-width: 140px;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--color-text-light);
+    border: 1px solid var(--color-border);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-background);
+    border-color: var(--color-text-light);
+}
+
+/* Enlace de retorno */
+.back-link {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+    transition: opacity 0.3s;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+}
+
+.back-link:hover {
+    opacity: 0.8;
+}
+
+.back-link .icon {
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+}
+
+/* Estilos para formulario con Ant Design */
+.config-form-container {
+    background-color: var(--color-white);
+    max-width: 500px;
+    width: 100%;
+    margin: 2vh auto;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.config-form {
+    padding: 0;
+}
+
+.config-form .ant-form-item-label,
+.config-form .custom-label {
+    display: block;
+    color: #555;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 20px 0 5px 0 !important;
+}
+
+.config-form .ant-form-item {
+    margin-bottom: 0px !important;
+}
+
+.config-form .ant-form-item-control {
+    display: block;
+}
+
+.config-form .ant-input {
+    background-color: var(--color-background);
+    color: var(--color-text-secondary) !important;
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    margin-bottom: 0px !important;
+}
+
+.config-form .ant-input-password {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid var(--color-border) !important;
+    border-radius: var(--border-radius);
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.config-form .ant-input:focus {
+    outline: none;
+    border-color: var(--color-primary-light);
+    box-shadow: 0 0 0 2px rgba(129, 199, 132, 0.2);
+}
+
+.config-form .ant-input-password.ant-input-affix-wrapper-focused {
+    border-color: var(--color-primary-light) !important;
+    box-shadow: 0 0 0 2px rgba(82, 196, 26, 0.2) !important;
+}
+
+.config-form .form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.config-form .btn-secondary {
+    background-color: transparent;
+    color: var(--color-text-light);
+    border: 1px solid var(--color-border) !important;
+    border-radius: var(--border-radius);
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    min-width: 140px;
+}
+
+.config-form .btn-secondary:hover {
+    background-color: var(--color-background) !important;
+    border-color: var(--color-text-light) !important;
+    color: var(--color-text-light) !important;
+}
+
+.config-button {
+    margin: 0 !important;
+    flex: 1;
+}
+
+.config-button .btn-login {
+    margin: 0;
+    width: 100%;
+}
+
+/* Responsive Styles */
+@media (max-width: 576px) {
+    .config-container {
+        padding: 15px;
+    }
+    
+    .form-container {
+        padding: 20px;
+        width: 100%;
+        margin: 0 0 20px 0;
+    }
+
+    .message {
+        width: 100%;
+        margin: 0 0 20px 0;
+        padding: 12px 16px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .btn-primary, .btn-secondary {
+        width: 100%;
+        min-width: auto;
+    }
+
+    .section-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .back-link {
+        margin: 20px 0 0 0;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .form-container {
+        margin: 0 20px 30px 20px;
+        max-width: none;
+    }
+
+    .message {
+        margin: 0 20px 30px 20px;
+        max-width: none;
+    }
+
+    .back-link {
+        margin: 20px 20px 0 20px;
+        max-width: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .config-form-container {
+        width: 90%;
+        padding: 20px;
+        margin: 1vh auto;
+    }
+
+    .config-form .form-actions {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .config-form .btn-secondary {
+        width: 100%;
+        min-width: auto;
+    }
+
+    .config-button {
+        width: 100%;
+    }
+}

@@ -1,6 +1,7 @@
 // BandejasGrid.jsx
 import React from 'react';
 import BandejaCard from './BandejaCard';
+import '../../styles/bandejas/BandejasGridStyles.css';
 
 const BandejasGrid = ({ bandejas = [] }) => {
     return (

@@ -1,9 +1,10 @@
 import React from 'react';
 import { Form, Input, Button } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
-import  AuthHeader from '@/components/AuthHeader';
-import AuthButton from '@/components/AuthButton';
-import '../../styles/LoginFormStyles.css'; 
+import AuthButton from './AuthButton';
+import AuthHeader from './AuthHeader';
+
+import '../../styles/login/LoginFormStyles.css'; 
 
 const LoginForm = () => {
     const [loading, setLoading] = React.useState(false);

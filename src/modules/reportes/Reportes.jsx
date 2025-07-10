@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header';
+import ContentLayout from '../../components/ContentLayout';
 import { usePage } from '../../hooks/usePage';
-import { useSidebar } from '../../hooks/useSidebar';
-import '../../styles/ReportesStyles.css';
+import '../../styles/reportes/ReportesStyles.css';
+import ButtonAdd from '../../components/ButtonAdd';
+import DataTable from '../../components/DataTable';
+import ReportDetailPanel from './ReportDetailPanel';
+import Modal from '../../components/Modal';
+import CreateReportForm from './CreateReportForm';
+
 
 const Reportes = () => {
-    const { pageTitle, setPageTitle } = usePage('Reportes');
-    const { collapsed } = useSidebar();
+    const { setPageTitle } = usePage('Reportes');
     const [selectedReport, setSelectedReport] = useState(null);
     const [showDetail, setShowDetail] = useState(false);
     const [showModal, setShowModal] = useState(false);
@@ -107,10 +112,28 @@ const Reportes = () => {
         setFormData(prev => ({ ...prev, fechaReporte: formattedDate }));
     }, []);
 
-    const handleDetailClick = (dataKey) => {
-        setSelectedReport(reportData[dataKey]);
+    const handleDetailClick = (report) => {
+        setSelectedReport(reportData[report.dataKey]);
         setShowDetail(true);
     };
+
+    // Define table columns
+    const tableColumns = [
+        { key: 'id', header: 'ID Reporte' },
+        { key: 'bandejaId', header: 'ID Bandeja' },
+        { key: 'userId', header: 'ID Usuario' },
+        { key: 'date', header: 'Fecha Reporte' },
+        { 
+            key: 'quality', 
+            header: 'Calidad Germinación',
+            render: (row) => (
+                <span className={`quality-badge ${row.qualityClass}`}>
+                    {row.quality}
+                </span>
+            )
+        },
+        { key: 'score', header: 'Calificación' }
+    ];
 
     const handleCloseDetail = () => {
         setShowDetail(false);
@@ -153,259 +176,53 @@ const Reportes = () => {
         handleCloseModal();
     };
 
-    const handleModalOverlayClick = (e) => {
-        if (e.target === e.currentTarget) {
-            handleCloseModal();
-        }
-    };
-
     return (
         <div>
-            <Header title={pageTitle} />
-            <div className="action-bar" style={{
-                marginLeft: collapsed ? '80px' : '260px',
-                transition: 'margin-left 0.3s ease',
-                padding: '24px'
-            }}>
-                <h1 className="section-title">Gestión de Reportes Semanales</h1>
-                <button onClick={handleCreateReport} className="btn-create">
-                    <svg className="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z" fill="white" />
-                    </svg>
-                    Crear Reporte
-                </button>
-            </div>
+            <Header title="Reportes Semanales" />
+            
+            <ContentLayout>
+                <div className="action-bar">
+                    <h2 className="section-title">Gestión de Reportes Semanales</h2>
+                    <ButtonAdd title="Crear Reporte" onClick={handleCreateReport} />
+                </div>
 
-            <div className="table-container" style={{
-                marginLeft: collapsed ? '80px' : '260px',
-                transition: 'margin-left 0.3s ease',
-                padding: '0 24px'
-            }}>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID Reporte</th>
-                            <th>ID Bandeja</th>
-                            <th>ID Usuario</th>
-                            <th>Fecha Reporte</th>
-                            <th>Calidad Germinación</th>
-                            <th>Calificación</th>
-                            <th>Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {reports.map((report) => (
-                            <tr key={report.id}>
-                                <td data-label="ID Reporte">{report.id}</td>
-                                <td data-label="ID Bandeja">{report.bandejaId}</td>
-                                <td data-label="ID Usuario">{report.userId}</td>
-                                <td data-label="Fecha Reporte">{report.date}</td>
-                                <td data-label="Calidad Germinación">
-                                    <span className={`quality-badge ${report.qualityClass}`}>
-                                        {report.quality}
-                                    </span>
-                                </td>
-                                <td data-label="Calificación">{report.score}</td>
-                                <td>
-                                    <button
-                                        className="btn-detail"
-                                        onClick={() => handleDetailClick(report.dataKey)}
-                                    >
-                                        Ver Detalle
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+                <DataTable
+                    columns={tableColumns}
+                    data={reports}
+                    onRowAction={handleDetailClick}
+                    actionButtonText="Ver Detalle"
+                    actionKey="id"
+                    className="table-container"
+                />
 
-            {/* Report Detail Panel */}
-            {showDetail && selectedReport && (
-                <div className="report-detail active">
-                    <div className="detail-header">
-                        <h3 className="detail-title">
-                            Detalle del Reporte <span>{selectedReport.id}</span>
-                        </h3>
-                        <button className="detail-close" onClick={handleCloseDetail}>
-                            ×
+            <ReportDetailPanel
+                isVisible={showDetail}
+                report={selectedReport}
+                onClose={handleCloseDetail}
+            />            <Modal
+                isOpen={showModal}
+                onClose={handleCloseModal}
+                title="Crear Nuevo Reporte"
+                size="medium"
+                footer={
+                    <>
+                        <button className="btn-cancel" onClick={handleCloseModal}>
+                            Cancelar
                         </button>
-                    </div>
-                    <div className="detail-content">
-                        <div className="detail-grid">
-                            <div className="detail-image">
-                                <img
-                                    src={selectedReport.image}
-                                    alt="Imagen del reporte"
-                                />
-                            </div>
-                            <div className="detail-info">
-                                <div className="info-group">
-                                    <div className="info-label">ID Reporte</div>
-                                    <div className="info-value">{selectedReport.id}</div>
-                                </div>
-                                <div className="info-group">
-                                    <div className="info-label">Fecha Reporte</div>
-                                    <div className="info-value">{selectedReport.date}</div>
-                                </div>
-                                <div className="info-group">
-                                    <div className="info-label">ID Bandeja</div>
-                                    <div className="info-value">{selectedReport.bandejaId}</div>
-                                </div>
-                                <div className="info-group">
-                                    <div className="info-label">Tipo de Semilla</div>
-                                    <div className="info-value">{selectedReport.seedType}</div>
-                                </div>
-                                <div className="info-group">
-                                    <div className="info-label">ID Usuario</div>
-                                    <div className="info-value">{selectedReport.userId}</div>
-                                </div>
-                                <div className="info-group">
-                                    <div className="info-label">Nombre Usuario</div>
-                                    <div className="info-value">{selectedReport.userName}</div>
-                                </div>
-                                <div className="info-group">
-                                    <div className="info-label">Calidad Germinación</div>
-                                    <div className="info-value">
-                                        <span className={`quality-badge ${selectedReport.qualityClass}`}>
-                                            {selectedReport.quality}
-                                        </span>
-                                    </div>
-                                </div>
-                                <div className="info-group">
-                                    <div className="info-label">Calificación</div>
-                                    <div className="info-value">{selectedReport.score}</div>
-                                </div>
-                                <div className="detail-description">
-                                    <div className="description-label">Descripción</div>
-                                    <div className="description-text">
-                                        {selectedReport.description}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )}
-
-            {/* Modal para crear reporte */}
-            {showModal && (
-                <div
-                    className={`modal-overlay ${showModal ? 'active' : ''}`}
-                    onClick={handleModalOverlayClick}
-                >
-                    <div className="modal">
-                        <div className="modal-header">
-                            <h3 className="modal-title">Crear Nuevo Reporte</h3>
-                            <button className="modal-close" onClick={handleCloseModal}>
-                                ×
-                            </button>
-                        </div>
-                        <div className="modal-body">
-                            <form>
-                                <div className="form-group">
-                                    <label htmlFor="idBandeja">ID Bandeja</label>
-                                    <select
-                                        className="form-control"
-                                        id="idBandeja"
-                                        name="idBandeja"
-                                        value={formData.idBandeja}
-                                        onChange={handleInputChange}
-                                        required
-                                    >
-                                        <option value="">Seleccionar bandeja</option>
-                                        <option value="BAN-A01">BAN-A01 - Tomate Cherry</option>
-                                        <option value="BAN-B05">BAN-B05 - Lechuga Romana</option>
-                                        <option value="BAN-C12">BAN-C12 - Pimiento</option>
-                                        <option value="BAN-D08">BAN-D08 - Albahaca</option>
-                                    </select>
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="fechaReporte">Fecha Reporte</label>
-                                    <input
-                                        type="date"
-                                        className="form-control"
-                                        id="fechaReporte"
-                                        name="fechaReporte"
-                                        value={formData.fechaReporte}
-                                        onChange={handleInputChange}
-                                        required
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="foto">Foto</label>
-                                    <div className="file-input-wrapper">
-                                        <label className="file-input-label">
-                                            Seleccionar archivo
-                                            <input
-                                                type="file"
-                                                className="file-input"
-                                                id="foto"
-                                                onChange={handleFileChange}
-                                                accept="image/*"
-                                            />
-                                        </label>
-                                        <span className="file-name">
-                                            {selectedFile ? selectedFile.name : 'Ningún archivo seleccionado'}
-                                        </span>
-                                    </div>
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="descripcion">Descripción</label>
-                                    <textarea
-                                        className="form-control"
-                                        id="descripcion"
-                                        name="descripcion"
-                                        value={formData.descripcion}
-                                        onChange={handleInputChange}
-                                        placeholder="Ingrese una descripción detallada del estado de la bandeja..."
-                                        required
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="calidadGerminacion">Calidad Germinación</label>
-                                    <select
-                                        className="form-control"
-                                        id="calidadGerminacion"
-                                        name="calidadGerminacion"
-                                        value={formData.calidadGerminacion}
-                                        onChange={handleInputChange}
-                                        required
-                                    >
-                                        <option value="">Seleccionar calidad</option>
-                                        <option value="excelente">Excelente</option>
-                                        <option value="buena">Buena</option>
-                                        <option value="regular">Regular</option>
-                                        <option value="deficiente">Deficiente</option>
-                                    </select>
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="calificacion">Calificación (0-100)</label>
-                                    <input
-                                        type="number"
-                                        className="form-control"
-                                        id="calificacion"
-                                        name="calificacion"
-                                        value={formData.calificacion}
-                                        onChange={handleInputChange}
-                                        min="0"
-                                        max="100"
-                                        required
-                                    />
-                                </div>
-                            </form>
-                        </div>
-                        <div className="modal-footer">
-                            <button className="btn-cancel" onClick={handleCloseModal}>
-                                Cancelar
-                            </button>
-                            <button className="btn-save" onClick={handleSaveReport}>
-                                Guardar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
+                        <button className="btn-save" onClick={handleSaveReport}>
+                            Guardar
+                        </button>
+                    </>
+                }
+            >
+                <CreateReportForm
+                    formData={formData}
+                    onInputChange={handleInputChange}
+                    onFileChange={handleFileChange}
+                    selectedFile={selectedFile}
+                />
+            </Modal>
+            </ContentLayout>
         </div>
     );
 };

@@ -1,0 +1,10 @@
+/* Estilos para UserCards Component */
+.user-cards {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .user-cards {
+        display: block;
+    }
+}

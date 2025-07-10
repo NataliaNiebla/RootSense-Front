@@ -1,0 +1,109 @@
+/* Sensores.css */
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    border-radius: 2px;
+    transform: none !important;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border: 2px dashed #dee2e6;
+    margin-top: 40px;
+}
+
+.empty-state p {
+    font-size: 1.1rem;
+    color: #6c757d;
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Type icon global styles */
+.type-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .actions-container {
+        flex-direction: column;
+        gap: 16px;
+        align-items: stretch;
+        text-align: center;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .section-title::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .empty-state {
+        padding: 40px 16px;
+        margin-top: 24px;
+    }
+    
+    .empty-state p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .actions-container {
+        padding: 16px 0;
+        margin-bottom: 20px;
+    }
+    
+    .section-title {
+        font-size: 1.3rem;
+    }
+}
+
+
+/* Import all component styles */
+@import './SensoresMain.css';
+@import './SensorCard.css';
+@import './SensorSection.css';
+@import './SensorModal.css';
+@import './MessageAlert.css';
+
+/* Global sensor styles and overrides can go here */
+
+/* Ensure proper type icon styling across all components */
+.type-icon {
+    fill: currentColor;
+    transition: all 0.2s ease;
+}
+
+/* Global responsive adjustments */
+@media (max-width: 1024px) {
+    .sensor-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .sensor-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .sensor-grid {
+        grid-template-columns: 1fr;
+    }
+}

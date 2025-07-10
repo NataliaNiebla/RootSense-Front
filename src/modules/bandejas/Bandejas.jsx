@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import BandejasGrid from './BandejasGrid';
 import ModalAddBandeja from './ModalAddBandeja';
-import '../../styles/BandejasStyles.css';
-import Header from '../../components/Header'; // Asegúrate de que la ruta sea correcta
-import { usePage } from '../../hooks/usePage';
-import { useSidebar } from '../../hooks/useSidebar';
+import '../../styles/bandejas/BandejasStyles.css';
+import Header from '../../components/Header';
+import ContentLayout from '../../components/ContentLayout';
+import ButtonAdd from '../../components/ButtonAdd';
 
 const Bandejas = () => {
-    const { pageTitle, setPageTitle } = usePage('Bandejas');
-    const { collapsed } = useSidebar();
     const [modalOpen, setModalOpen] = useState(false);
     const [formValues, setFormValues] = useState({
         nombre: '',
@@ -16,10 +14,6 @@ const Bandejas = () => {
         tipoSemilla: '',
         fechaInicio: ''
     });
-
-    useEffect(() => {
-        setPageTitle('Bandejas');
-    }, [setPageTitle]);
 
     // Datos de ejemplo
     const [bandejas, setBandejas] = useState([
@@ -111,26 +105,18 @@ const Bandejas = () => {
     };
 
     return (
-        <div className="bandejas-page">
-            <Header title={pageTitle} />
-            <div className="action-bar" style={{
-                marginLeft: collapsed ? '80px' : '260px',
-                transition: 'margin-left 0.3s ease',
-                padding: '24px'
-            }}>
-                <h2 className="section-title">Gestión de Bandejas</h2>
-                <button onClick={toggleModal} className="btn-add">
-                    <span className="icon">+</span>
-                    Agregar Bandeja
-                </button>
-            </div>
-            <div style={{
-                marginLeft: collapsed ? '80px' : '260px',
-                transition: 'margin-left 0.3s ease',
-                padding: '0 24px'
-            }}>
+        <div>
+            <Header title="Bandejas" />
+
+            <ContentLayout>
+                <div className="action-bar">
+                    <h2 className="section-title">Gestión de Bandejas</h2>
+                    <ButtonAdd title="Agregar Bandeja" onClick={toggleModal} />
+                </div>
+
                 <BandejasGrid bandejas={bandejas} />
-            </div>
+            </ContentLayout>
+
             <ModalAddBandeja 
                 isOpen={modalOpen}
                 onClose={toggleModal}

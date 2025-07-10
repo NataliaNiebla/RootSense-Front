@@ -1,0 +1,155 @@
+/* LoginFormStyles.css */
+.login-container {
+    background-color: var(--color-container); 
+    max-width: 400px;
+    width: 100%;
+    margin: 12vh auto; /* Centrado horizontal */
+    border-radius: var(--border-radius); 
+    box-shadow: var(--shadow); 
+    overflow: hidden; /* Evita que los elementos sobresalgan */
+    padding: 20px; 
+    display: flex;
+    flex-direction: column; /* Coloca los elementos en columna */
+}
+
+/* Header y logo */
+.auth-header {
+    text-align: center;
+}
+
+.logo {
+    width: 100%; /* Ancho del logo */
+    height: auto; /* Mantiene la proporción */
+    margin: 15px 0 10px 0; /* Espacio encima y debajo del logo */
+}
+
+.tagline {
+    font-family: 'Roboto', sans-serif; /* Fuente Roboto */
+    color: #666; /* Gris medio */
+    font-size: 14px;
+    margin-bottom: 20px;
+    font-weight: 300;
+}
+
+/* Formulario */
+.login-form {
+    padding: 0 20px 10px;  /*Espaciado interno del formulario */
+}
+
+.login-form .ant-form-item-label,
+.login-form .custom-label {
+    display: block;
+    color: #555;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 20px 0 5px 0 !important; /* Espacio entre la etiqueta y el input */
+}
+
+.ant-form-item {
+    margin-bottom: 0px !important;
+}
+
+.login-form .ant-form-item-control {
+    display: block; /* Asegura que el control ocupe todo el ancho */
+}
+
+.login-form .ant-input{
+    background-color: var(--color-background);
+    color: var(--color-text-secondary) !important; /* Color del texto */
+    width: 100%;
+    padding: 10px 15px; /* Espaciado interno del input */
+    border: 1px solid var(--color-border); 
+    border-radius: var(--border-radius); 
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    margin-bottom: 0px !important;
+}
+
+.login-form .ant-input-password {
+    width: 100%;
+    padding: 10px 15px; /* Espaciado interno del input */
+    border: 1px solid var(--color-border) !important; 
+    border-radius: var(--border-radius); 
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.login-form .ant-input:focus { 
+    outline: none;
+    border-color: var(--color-primary-light); /* Verde claro al enfocar */
+    box-shadow: 0 0 0 2px rgba(129, 199, 132, 0.2); /* Sombra al enfocar */
+}
+
+/* Cuando el wrapper del password está enfocado */
+.login-form .ant-input-password.ant-input-affix-wrapper-focused {
+    border-color: var(--color-primary-light) !important;
+    box-shadow: 0 0 0 2px rgba(82, 196, 26, 0.2) !important;
+}
+
+/* Botón */
+.btn-login-button {
+    margin: 0; /* Elimina márgenes no deseados */
+    padding: 0; /* Ajusta el padding si es necesario */
+}
+
+.btn-login {
+    background-color: var(--color-primary); 
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 22px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.3s, transform 0.2s;
+    width: 100%; 
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-login:hover{
+    color: white !important;
+    background-color: var(--color-primary-light) !important;
+    box-shadow: var(--shadow-md);
+}
+
+.btn-login:active {
+    transform: scale(0.98);
+    background-color: var(--color-primary-dark) !important; /* Cambia a verde oscuro al hacer clic */
+}
+
+.login-button {
+    margin: 30px 0 20px 0 !important;
+}
+
+/* Enlaces */
+.link-Auth {
+    text-align: center;
+}
+
+.link-Auth a {
+    color: var(--color-primary-dark); /* Verde oscuro */
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.link-Auth a:hover {
+    color: var(--color-primary); /* Verde principal al pasar el mouse */
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .login-container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .login-form {
+        padding: 0 20px 20px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+}

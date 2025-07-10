@@ -1,0 +1,186 @@
+/* BandejaCard.css - Estilos para las tarjetas individuales de bandejas */
+
+/* Bandeja Card */
+.bandeja-card {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: box-shadow 0.3s;
+    width: 98%;
+}
+
+.bandeja-card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.bandeja-header {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: var(--color-white) !important;
+    padding: 1rem 1.5rem;
+    position: relative; 
+}
+
+.bandeja-title {
+    font-size: 1rem !important;
+    color: var(--color-white) !important;
+}
+
+.bandeja-location {
+    font-size: .8rem !important;
+    opacity: 0.9;
+    color: var(--color-white) !important;
+}
+
+.bandeja-content {
+    padding: 1rem 1.5rem;
+}
+
+.bandeja-info {
+    margin-bottom: 1rem;
+}
+
+.info-row {
+    display: flex;
+    margin-bottom: .3rem;
+}
+
+.info-label {
+    font-weight: 500;
+    font-size: .8rem !important;
+    color: var(--color-text);
+    min-width: 100px !important;
+    text-transform: none !important; 
+}
+
+.info-value {
+    color: var(--color-text-light);
+    font-size: .8rem !important;
+}
+
+.bandeja-actions {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-sensors {
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 8px 16px;
+    font-size: .8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.3s;
+    display: flex;
+    align-items: center;
+}
+
+.btn-sensors:hover {
+    opacity: 0.8;
+}
+
+.btn-sensors .icon {
+    margin-right: .5rem !important;
+    width: 18px;
+    height: 18px;
+}
+
+/* Sensors Panel */
+.sensors-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    border-top: 1px solid var(--color-border);
+    background-color: var(--color-white);
+}
+
+.sensors-panel.active {
+    max-height: 300px;
+    padding: 1rem 1.5rem;
+}
+
+.sensors-title {
+    color: var(--color-primary-dark);
+    font-size: 1rem !important;
+    font-weight: 500;
+    margin-bottom: .8rem;
+}
+
+.sensors-list {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.sensor-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-white);
+    padding: .5rem .5rem !important;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-border);
+}
+
+.sensor-id {
+    font-weight: 500;
+    color: var(--color-text);
+    font-size: .8rem !important;
+}
+
+.sensor-type {
+    color: var(--color-text-light);
+    font-size: .8rem !important;
+}
+
+.sensor-status {
+    padding: .3rem .6rem;
+    border-radius: 4px;
+    font-size: .8rem !important;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.status-active {
+    background-color: #e8f5e8;
+    color: #2e7d32;
+}
+
+.status-inactive {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+.status-maintenance {
+    background-color: #fff3e0;
+    color: #ef6c00;
+}
+
+.no-sensors {
+    text-align: center;
+    color: var(--color-text-light);
+    font-style: italic;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .bandeja-card {
+        margin-bottom: 20px;
+    }
+    
+    .info-row {
+        flex-direction: column;
+        gap: 4px;
+    }
+    
+    .info-label {
+        min-width: auto;
+        font-size: 14px;
+    }
+    
+    .info-value {
+        font-size: 13px;
+    }
+}

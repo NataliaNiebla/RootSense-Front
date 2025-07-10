@@ -1,0 +1,93 @@
+/* ContentLayout Styles */
+.content-layout {
+    transition: margin-left 0.4s ease;
+    flex-direction: column;
+    background-color: var(--color-bg);
+}
+
+.content-layout--collapsed {
+    margin: 4.5rem .3rem 0rem 5rem; /* arriba-derecha-abajo-izquierda */
+}
+
+.content-layout--expanded {
+    margin: 4.5rem .3rem 0rem 15rem;
+}
+
+/* Section Title */
+.section-title {
+    color: var(--color-primary-dark) !important;
+    font-size: 1.5rem !important;
+    margin-bottom: 1rem !important;
+    font-weight: 500 !important;
+}
+
+.section-title::after {
+    display: none !important;
+}
+
+/* Page Header */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-add {
+    background-color: var(--color-primary-light) !important;
+    color: white !important;
+    border: none;
+    border-radius: var(--border-radius) !important;
+    padding: 1.1rem 1.5rem !important;
+    font-size: .9rem !important;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.4s, transform 0.2s;
+    box-shadow: var(--shadow-sm) !important;
+    margin:0;
+    bottom: .4rem; 
+}
+
+.btn-add:hover {
+    opacity: 0.8;
+    color: white !important;
+    background-color: var(--color-primary-dark) !important;
+    box-shadow: var(--shadow-md) !important; 
+}
+
+.btn-add:active {
+    transform: scale(0.98);
+    background-color: var(--color-primary-light) !important; /* Cambia a verde oscuro al hacer clic */
+}
+
+.btn-detail {
+    background-color: transparent;
+    border: 1px solid var(--color-primary) !important;
+    color: var(--color-primary-dark);
+    border-radius: var(--border-radius);
+    padding: 5px 10px !important;
+    font-size: .8rem !important;
+    cursor: pointer; 
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-detail:hover {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.btn-see-all {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    box-shadow: none;
+    color: var(--color-primary-dark);
+    font-size: .8rem !important;
+    font-weight: 500;
+    cursor: pointer; 
+    
+}
+
+.btn-see-all:hover {
+    background-color: transparent !important;
+    color: var(--color-primary) !important;
+    text-decoration: none !important;
+}

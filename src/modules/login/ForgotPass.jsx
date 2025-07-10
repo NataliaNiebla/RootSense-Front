@@ -1,9 +1,10 @@
 import React from 'react';
-import { Form, Input, Button } from 'antd';
-import AuthButton from '../../components/AuthButton';
-import AuthHeader from '../../components/AuthHeader';
+import { Form, Input } from 'antd';
+import AuthButton from './AuthButton';
+import AuthHeader from './AuthHeader';
 import { Link } from 'react-router-dom';
-import '../../styles/LoginFormStyles.css'; 
+
+import '../../styles/login/LoginFormStyles.css'; 
 
 const ForgotPass = () => {
     const onFinish = (values) => {

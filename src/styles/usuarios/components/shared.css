@@ -1,0 +1,95 @@
+/* Estilos compartidos para botones y badges - Usado por todos los componentes */
+
+/* Botones */
+.btn {
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.3s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    opacity: 0.8;
+}
+
+.btn-secondary {
+    background-color: var(--color-border);
+    color: var(--color-text);
+}
+
+.btn-secondary:hover {
+    background-color: #D5D5D5;
+}
+
+.btn-danger {
+    background-color: var(--color-error);
+    color: white;
+}
+
+.btn-danger:hover {
+    opacity: 0.8;
+}
+
+.btn-warning {
+    background-color: #FF9800;
+    color: white;
+}
+
+.btn-warning:hover {
+    opacity: 0.8;
+}
+
+.btn .icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+}
+
+/* Badges para roles y estados */
+.role-badge, .status-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+/* Roles */
+.role-admin {
+    background-color: rgba(244, 67, 54, 0.1);
+    color: var(--color-error);
+}
+
+.role-supervisor {
+    background-color: rgba(255, 152, 0, 0.1);
+    color: #E65100;
+}
+
+.role-operator {
+    background-color: rgba(139, 111, 71, 0.1);
+    color: var(--color-sidebar);
+}
+
+/* Estados */
+.status-active {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: var(--color-primary-dark);
+}
+
+.status-inactive {
+    background-color: rgba(158, 158, 158, 0.1);
+    color: #757575;
+}

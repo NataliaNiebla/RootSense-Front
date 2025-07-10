@@ -1,10 +1,10 @@
 import React from 'react';
-import { UploadOutlined, UserOutlined, VideoCameraOutlined, } from '@ant-design/icons';
+import { UserOutlined, BarChartOutlined, LayoutOutlined, SettingOutlined, ThunderboltOutlined, RobotOutlined, PlusSquareOutlined, CalendarOutlined} from '@ant-design/icons';
 import { Layout, Menu, theme } from 'antd';
 import { useNavigate, Outlet, useLocation} from 'react-router-dom';
 import logo from '../assets/imgs/RS_logo.png'; 
 import icon from '../assets/imgs/iconpng.png'; // adjust the path if necessary
-import '../styles/Sidebar.css'; 
+import '../styles/components/Sidebar.css'; 
 import SidebarToggleButton from '../components/SidebarToggleButton';
 import { useSidebar } from '../hooks/useSidebar';
 
@@ -20,19 +20,10 @@ const Sidebar = () => {
 
     return (
         <Layout style={{ minHeight: '100vh' }}>
-            <Sider className="sidebar" width={260} trigger={null} collapsible collapsed={collapsed}>
-                <div
-                    className="sidebar-toggle-container"
-                        style={{
-                        position: 'absolute',
-                        top: 16,
-                        left: collapsed ? 80 : 260, // cambia según estado
-                        zIndex: 1001, // por encima del sidebar
-                        transition: 'left 0.3s ease',
-                        }}
-                    >
+            <Sider className="sidebar" width={240} trigger={null} collapsible collapsed={collapsed}>
+                <div className={`sidebar-toggle-container ${collapsed ? 'collapsed' : 'expanded'}`}>
                     <SidebarToggleButton collapsed={collapsed} onToggle={toggleSidebar} />
-            </div>
+                </div>
 
                  <div className="sidebar-header">
                     {collapsed ? (
@@ -41,6 +32,7 @@ const Sidebar = () => {
                         <img src={logo} alt="Logo" className="logo" />
                     )}
                  </div>
+
             <Menu
                 className="sidebar-menu"
                 selectedKeys={[location.pathname]}
@@ -50,14 +42,14 @@ const Sidebar = () => {
                     navigate(key);
                 }}
                 items={[
-                { key: '/dashboard', icon: <UserOutlined />, label: 'Dashboard'},
-                { key: '/bandejas', icon: <VideoCameraOutlined />, label: 'Bandejas'},
-                { key: '/reportes', icon: <UploadOutlined />, label: 'Reportes Semanales'},
-                { key: '/bitacora', icon: <UserOutlined />, label: 'Bitácora'},
-                { key: '/usuarios', icon: <VideoCameraOutlined />, label: 'Usuarios'},
-                { key: '/actuadores', icon: <UploadOutlined />, label: 'Actuadores'},
-                { key: '/sensores', icon: <UserOutlined />, label: 'Sensores'},
-                { key: '/configuracion', icon: <VideoCameraOutlined />, label: 'Configuración'},
+                { key: '/dashboard', icon: <LayoutOutlined />, label: 'Dashboard'},
+                { key: '/bandejas', icon: <PlusSquareOutlined />, label: 'Bandejas'},
+                { key: '/reportes', icon: <BarChartOutlined />, label: 'Reportes Semanales'},
+                { key: '/bitacora', icon: <CalendarOutlined />, label: 'Bitácora Historica'},
+                { key: '/usuarios', icon: <UserOutlined />, label: 'Gestión de Usuarios'},
+                { key: '/actuadores', icon: <RobotOutlined />, label: 'Actuadores'},
+                { key: '/sensores', icon: <ThunderboltOutlined />, label: 'Sensores'},
+                { key: '/configuracion', icon: <SettingOutlined />, label: 'Configuración'},
             ]}
             />
             </Sider>

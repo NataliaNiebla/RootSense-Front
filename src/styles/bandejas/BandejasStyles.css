@@ -1,0 +1,64 @@
+/* Bandejas.css - Estilos generales de la página de bandejas */
+main {
+    overflow-y: auto; /* Permite el desplazamiento vertical */
+}
+
+/* Bandejas Page Layout */
+.bandejas-page {
+    padding: 20px;
+    margin-top: 80px; /* Espacio para el header fijo */
+    min-height: calc(100vh - 80px);
+}
+
+/* Action Bar*/
+.action-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.btn-add {
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.3s, transform 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.btn-add:hover {
+    opacity: 0.8;
+}
+
+.btn-add:active {
+    transform: scale(0.98);
+}
+
+.btn-add .icon {
+    margin-right: 8px;
+    width: 18px;
+    height: 18px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .bandejas-page {
+        padding: 15px;
+    }
+    
+    .action-bar {
+        flex-direction: column;
+        gap: 15px;
+        align-items: stretch;
+    }
+    
+    .btn-add {
+        justify-content: center;
+    }
+}
