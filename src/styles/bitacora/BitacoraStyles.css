@@ -1,34 +1,21 @@
 /* Estilos para el componente Bitácora */
 
-/* Section Title */
-.section-title {
-    color: var(--color-primary-dark);
-    margin-bottom: 20px;
-    font-size: 1.5rem;
-    font-weight: 600;
-}
-
 /* Filter Container */
 .filter-container {
     background-color: var(--color-white);
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-sm);
-    padding: 20px;
-    margin-bottom: 20px;
-    border: 1px solid var(--color-border);
 }
 
 .filter-title {
-    color: var(--color-primary-dark);
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 16px;
+    color: var(--color-white) !important;
+    font-size: 1rem;
+    font-weight: 500;
     display: flex;
     align-items: center;
 }
 
 .filter-title .icon {
-    margin-right: 8px;
     width: 20px;
     height: 20px;
 }
@@ -36,7 +23,6 @@
 .filter-form {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 16px;
 }
 
 .form-group {
@@ -45,9 +31,8 @@
 
 .form-group label {
     display: block;
-    margin-bottom: 8px;
     color: var(--color-text);
-    font-size: 14px;
+    font-size: 8rem !important;
     font-weight: 500;
 }
 
@@ -172,7 +157,7 @@
 .card-info {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+    gap: 10px;
     margin-bottom: 20px;
 }
 

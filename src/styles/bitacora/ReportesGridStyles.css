@@ -1,6 +1,6 @@
 /* ReportesGrid Styles */
 .reportes-grid-container {
-    margin-top: 1.5rem;
+    margin-top: 20px;
 }
 
 .reporte-card {
@@ -15,7 +15,6 @@
 
 .reporte-card:hover {
     box-shadow: var(--shadow-md);
-    transform: translateY(-4px);
     border-color: var(--color-primary);
 }
 
@@ -23,7 +22,6 @@
 .card-cover {
     background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     padding: 1rem;
-    color: var(--color-white);
     position: relative;
     min-height: 80px;
     display: flex;
@@ -34,30 +32,32 @@
 .card-tipo-badge {
     display: flex;
     align-items: center;
-    gap: 9px;
-    background: var(--color-white);
+    gap: .3rem;
+    background: rgba(255, 255, 255, 0.9);
+    padding: .3rem .5rem;
     border-radius: var(--border-radius);
     font-weight: 600;
-    width: fit-content;
+    width: fit-content;  
     color: var(--color-primary-dark);
 }
 
 .tipo-icon {
-    font-size: 14px;
+    font-size: .8rem;
 }
 
 .tipo-text {
-    font-size: 12px;
+    font-size: .7rem;
     font-weight: 600;
 }
 
 .card-fecha {
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-size: 13px;
+    gap: .3rem;
+    font-size: .8rem;
     opacity: 0.9;
-    margin-top: 8px;
+    margin-top: .5rem;
+    color: var(--color-white);
 }
 
 /* Card Title Section */
@@ -65,29 +65,29 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    
+    margin-bottom: .5rem !important;
 }
 
-.bandeja-title {
+.bandeja-title {   /*no esta en uso*/
     margin: 0;
-    font-size: 16px;
+    font-size: .8rem;
     font-weight: 600;
-    color: #262626;
+    color: var(--color-text);
 }
 
 .calidad-tag {
-    font-size: 11px;
+    font-size: .7rem;
     font-weight: 500;
-    padding: 2px 8px;
-    border-radius: 12px;
-    margin: 0;
+    padding: .3rem .5rem;
+    border-radius: var(--border-radius);
+    margin: 0 !important;
 }
 
 /* Card Metrics */
 .card-metrics {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: .5rem;
 }
 
 .metric-row {
@@ -123,32 +123,28 @@
 }
 
 .metric-label {
-    font-size: 11px;
-    color: #8c8c8c;
+    font-size: .8rem !important;
+    color: var(--color-text-secondary) !important;
     font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    line-height: 1;
+    text-transform: none !important;
 }
 
 .metric-value {
-    font-size: 13px;
-    color: #262626;
+    font-size: 1rem !important;
+    color: var(--color-text) !important;
     font-weight: 600;
-    margin-top: 2px;
-    line-height: 1.2;
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    text-overflow: ellipsis; /*hace que el texto largo se recorte con puntos suspensivos*/
+    white-space: nowrap;   /*hace que el texto no se divida en varias líneas*/
 }
 
 /* Observaciones Section */
 .observaciones-section {
-    background: #fafafa;
-    padding: 12px;
-    border-radius: 8px;
-    margin-top: 8px;
-    border: 1px solid #f0f0f0;
+    background: var(--color-primary-dark) !important;
+    padding: .5rem 1rem !important;;
+    border-radius: var(--border-radius);
+    margin-top: 1rem;
+    border: 1px solid var(--color-border);
 }
 
 .observaciones-label {

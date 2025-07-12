@@ -18,6 +18,8 @@ const AnalysisPanel = ({
     if (!reporte) return null;
 
     const { analisisIA } = reporte;
+    
+    if (!analisisIA) return null;
 
     // Función para obtener el color del tag según la calidad
     const obtenerColorCalidad = (calidad) => {
@@ -49,14 +51,6 @@ const AnalysisPanel = ({
             onClose={onClose}
             closeIcon={<CloseOutlined />}
             className="analysis-drawer"
-            extra={
-                <Button 
-                    type="text" 
-                    icon={<CloseOutlined />} 
-                    onClick={onClose}
-                    className="close-button"
-                />
-            }
         >
             <div className="analysis-content">
                 {/* Header del reporte */}

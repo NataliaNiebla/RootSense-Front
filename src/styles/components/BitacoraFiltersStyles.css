@@ -1,0 +1,296 @@
+/* BitacoraFilters Component Styles */
+.bitacora-filters-card {
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-border);
+    background-color: var(--color-white);
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.bitacora-filters-card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.bitacora-filters-card .ant-card-head {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.bitacora-filters-card .ant-card-head-title {
+    padding: 0;
+}
+
+.filter-title {
+    display: flex;
+    align-items: center;
+    gap: .5rem !important;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-primary-dark);
+}
+
+.filter-icon {
+    font-size: 1.5rem;
+    color: var(--color-white);
+}
+
+.bitacora-filters-card .ant-card-body {
+    padding: 1rem 1.5rem;
+}
+
+/* Form Styles */
+
+.bitacora-filters-form .ant-form-item-label > label {
+    font-weight: 600;
+    color: var(--color-text) !important;
+    font-size: .8rem;
+}
+
+/* Input Styles */
+.bitacora-filters-form .ant-picker,
+.bitacora-filters-form .ant-input,
+
+.bitacora-filters-form .ant-select-selector {
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-border);
+    transition: all 0.3s ease;
+    background-color: var(--color-white);
+}
+
+.bitacora-filters-form .ant-picker:hover,
+.bitacora-filters-form .ant-input:hover,
+.bitacora-filters-form .ant-select:hover .ant-select-selector {
+    border-color: var(--color-primary) !important;
+    box-shadow: 0 0 0 2px rgba(183, 226, 76, 0.1) !important;
+}
+
+.bitacora-filters-form .ant-picker-focused,
+.bitacora-filters-form .ant-input:focus,
+.bitacora-filters-form .ant-select-focused .ant-select-selector {
+    border-color: var(--color-primary) !important;
+    box-shadow: 0 0 0 2px rgba(183, 226, 76, 0.2) !important;
+}
+
+/* Search Input Styles */
+.bitacora-filters-form .ant-input-search .ant-input-group-addon .ant-btn {
+    border-color: var(--color-border);
+    background: var(--color-container);
+    color: var(--color-text);
+}
+
+.bitacora-filters-form .ant-input-search .ant-input-group-addon .ant-btn:hover {
+    border-color: var(--color-primary);
+    background: var(--color-primary);
+    color: var(--color-primary-dark);
+}
+
+/* Corregir alineación específica del Search Input */
+.bitacora-filters-form .ant-input-search .ant-input-affix-wrapper {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border-right: none !important;
+}
+
+.bitacora-filters-form .ant-input-search:hover .ant-input-affix-wrapper {
+    border-color: var(--color-primary) !important;
+}
+
+.bitacora-filters-form .ant-input-search:hover .ant-input-group-addon .ant-btn {
+    border-color: var(--color-primary) !important;
+}
+
+/* Button Styles */
+.bitacora-filters-form .ant-btn {
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    padding: .3rem 1rem !important;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.bitacora-filters-form .ant-btn-primary {
+    background: var(--color-primary) !important;
+    border-color: var(--color-primary) !important;
+    color: var(--color-primary-dark) !important;
+    box-shadow: var(--shadow-sm);
+}
+
+.bitacora-filters-form .ant-btn-primary:hover {
+    background: var(--color-primary-light) !important;
+    border-color: var(--color-primary-light) !important;
+    box-shadow: var(--shadow-md);
+}
+
+.bitacora-filters-form .ant-btn-primary:active {
+    transform: translateY(0);
+}
+
+.bitacora-filters-form .ant-btn:not(.ant-btn-primary) {
+    border: 1px solid var(--color-border);
+    background: var(--color-white);
+    color: var(--color-text);
+}
+
+.bitacora-filters-form .ant-btn:not(.ant-btn-primary):hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary-dark);
+    background: var(--color-container);
+}
+
+.bitacora-filters-form .ant-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.bitacora-filters-form .ant-btn:disabled:hover {
+    transform: none;
+    border-color: var(--color-border);
+    background: var(--color-white);
+    color: var(--color-text-secondary);
+}
+
+/* Select Dropdown Styles */
+.ant-select-dropdown {  /* esto sirve para aplicar estilos a las opciones del select */
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-border);
+}
+
+.ant-select-dropdown .ant-select-item {
+    border-radius: var(--border-radius);
+    margin: .5rem .5rem;
+}
+
+.ant-select-dropdown .ant-select-item-option-selected {
+    background-color: rgba(183, 226, 76, 0.1) !important;
+    color: var(--color-primary-dark) !important;
+}
+
+.ant-select-dropdown .ant-select-item-option:hover {
+    background-color: var(--color-container) !important;
+}
+
+/* Date Picker Styles */
+.ant-picker-dropdown {
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+}
+
+.ant-picker-cell-selected .ant-picker-cell-inner {
+    background: var(--color-primary) !important;
+    color: var(--color-primary-dark) !important;
+}
+
+.ant-picker-cell:hover .ant-picker-cell-inner {  /*esto aplica un hover a las celdas del datepicker */
+    background: rgba(183, 226, 76, 0.2) !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .bitacora-filters-card .ant-card-body {
+        padding: 16px;
+    }
+    
+    .bitacora-filters-form .ant-row {
+        margin: 0 -8px;
+    }
+    
+    .bitacora-filters-form .ant-col {
+        padding: 0 8px;
+    }
+    
+    .filter-title {
+        font-size: 14px;
+    }
+    
+    .bitacora-filters-form .ant-btn {
+        height: 32px;
+        padding: 0 12px;
+        font-size: 13px;
+    }
+    
+    .bitacora-filters-form .ant-form-item {
+        margin-bottom: 12px;
+    }
+}
+
+@media (max-width: 576px) {
+    .bitacora-filters-form .ant-space {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 8px;
+    }
+    
+    .bitacora-filters-form .ant-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Animation */
+.bitacora-filters-card {
+    animation: fadeInUp 0.4s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loading State */
+.bitacora-filters-card.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.bitacora-filters-card.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.5);
+    z-index: 1;
+}
+
+/* Focus Management */
+.bitacora-filters-form *:focus {
+    outline: none;
+}
+
+.bitacora-filters-form .ant-form-item-has-error .ant-picker,
+.bitacora-filters-form .ant-form-item-has-error .ant-input,
+.bitacora-filters-form .ant-form-item-has-error .ant-select-selector {
+    border-color: var(--color-error) !important;
+}
+
+/* Custom Scrollbar for Select Options */
+.ant-select-dropdown .rc-virtual-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.ant-select-dropdown .rc-virtual-list::-webkit-scrollbar-track {
+    background: #f5f5f5;
+    border-radius: 3px;
+}
+
+.ant-select-dropdown .rc-virtual-list::-webkit-scrollbar-thumb {
+    background: #d9d9d9;
+    border-radius: 3px;
+}
+
+.ant-select-dropdown .rc-virtual-list::-webkit-scrollbar-thumb:hover {
+    background: #bfbfbf;
+}

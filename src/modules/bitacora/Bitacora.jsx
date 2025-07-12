@@ -1,78 +1,79 @@
 import React, { useState, useEffect } from 'react';
 import '../../styles/bitacora/BitacoraStyles.css';
-import '../../styles/bitacora/BitacoraFiltersStyles.css';
 import '../../styles/bitacora/ReportesGridStyles.css';
 import '../../styles/bitacora/AnalysisPanelStyles.css';
-import Header from '../../components/Header'; // Asegúrate de que la ruta sea correcta
+import '../../styles/components/BitacoraFiltersStyles.css';
+import Header from '../../components/Header';
 import ContentLayout from '../../components/ContentLayout';
-import BitacoraFilters from './BitacoraFilters';
-import ReportesGrid from './ReportesGrid';
+import BitacoraFilters from '../bitacora/BitacoraFilters';
+import ReportesList from './components/ReportesList';
 import AnalysisPanel from './AnalysisPanel';
 
 // Datos de ejemplo - reemplazar con llamada a API
 const reportesEjemplo = [
-        {
-            id: 1,
-            fecha: '2025-01-15',
-            bandeja: 'Bandeja A1',
-            tipoReporte: 'Semanal',
-            calidad: 'excelente',
-            temperaturaPromedio: '24.5°C',
-            humedadPromedio: '68%',
-            phPromedio: '6.8',
-            observaciones: 'Crecimiento óptimo de lechugas',
-            analisisIA: {
-                resumen: 'Las condiciones han sido óptimas durante esta semana con un crecimiento excelente de las plantas.',
-                recomendaciones: [
-                    'Mantener los niveles actuales de humedad',
-                    'Continuar con el programa de riego establecido',
-                    'Monitorear posibles plagas en las próximas 48 horas'
-                ],
-                alertas: []
-            }
-        },
-        {
-            id: 2,
-            fecha: '2025-01-08',
-            bandeja: 'Bandeja B2',
-            tipoReporte: 'Semanal',
-            calidad: 'buena',
-            temperaturaPromedio: '26.2°C',
-            humedadPromedio: '72%',
-            phPromedio: '7.1',
-            observaciones: 'Ligero incremento en temperatura',
-            analisisIA: {
-                resumen: 'Condiciones generalmente buenas, pero se detectó un ligero aumento en la temperatura.',
-                recomendaciones: [
-                    'Ajustar ventilación para reducir temperatura',
-                    'Revisar sistema de enfriamiento',
-                    'Aumentar frecuencia de monitoreo'
-                ],
-                alertas: ['Temperatura ligeramente elevada']
-            }
-        },
-        {
-            id: 3,
-            fecha: '2025-01-01',
-            bandeja: 'Bandeja C3',
-            tipoReporte: 'Semanal',
-            calidad: 'regular',
-            temperaturaPromedio: '22.8°C',
-            humedadPromedio: '55%',
-            phPromedio: '6.2',
-            observaciones: 'Humedad por debajo del rango óptimo',
-            analisisIA: {
-                resumen: 'Se requiere atención inmediata para corregir los niveles de humedad.',
-                recomendaciones: [
-                    'Incrementar frecuencia de riego',
-                    'Revisar sistema de humidificación',
-                    'Ajustar configuración de sensores'
-                ],
-                alertas: ['Humedad por debajo del rango óptimo', 'pH ligeramente ácido']
-            }
+    {
+        id: 1,
+        fecha: '2025-01-15',
+        bandeja: 'Bandeja A1',
+        tipoReporte: 'Semanal',
+        calidad: 'excelente',
+        temperaturaPromedio: '24.5°C',
+        humedadPromedio: '68%',
+        phPromedio: '6.8',
+        observaciones: 'Crecimiento óptimo de lechugas',
+        analisisIA: {
+            resumen: 'Las condiciones han sido óptimas durante esta semana con un crecimiento excelente de las plantas.',
+            recomendaciones: [
+                'Mantener los niveles actuales de humedad',
+                'Continuar con el programa de riego establecido',
+                'Monitorear posibles plagas en las próximas 48 horas'
+            ],
+            alertas: []
         }
-    ];
+    },
+    {
+        id: 2,
+        fecha: '2025-01-08',
+        bandeja: 'Bandeja B2',
+        tipoReporte: 'Semanal',
+        calidad: 'buena',
+        temperaturaPromedio: '26.2°C',
+        humedadPromedio: '72%',
+        phPromedio: '7.1',
+        observaciones: 'Ligero incremento en temperatura',
+        analisisIA: {
+            resumen: 'Condiciones generalmente buenas, pero se detectó un ligero aumento en la temperatura.',
+            recomendaciones: [
+                'Ajustar ventilación para reducir temperatura',
+                'Revisar sistema de enfriamiento',
+                'Aumentar frecuencia de monitoreo'
+            ],
+            alertas: ['Temperatura ligeramente elevada']
+        }
+    },
+    {
+        id: 3,
+        fecha: '2025-01-01',
+        bandeja: 'Bandeja C3',
+        tipoReporte: 'Semanal',
+        calidad: 'regular',
+        temperaturaPromedio: '22.8°C',
+        humedadPromedio: '55%',
+        phPromedio: '6.2',
+        observaciones: 'Humedad por debajo del rango óptimo',
+        analisisIA: {
+            resumen: 'Se requiere atención inmediata para corregir los niveles de humedad.',
+            recomendaciones: [
+                'Incrementar frecuencia de riego',
+                'Revisar sistema de humidificación',
+                'Ajustar configuración de sensores'
+            ],
+            alertas: ['Humedad por debajo del rango óptimo', 'pH ligeramente ácido']
+        }
+    }
+];
 
+// Componente principal de Bitácora
 const Bitacora = () => {
     const [reportes, setReportes] = useState([]);
     const [filtros, setFiltros] = useState({
@@ -154,8 +155,8 @@ const Bitacora = () => {
                     onLimpiarFiltros={limpiarFiltros}
                 />
 
-                {/* Grid de Reportes */}
-                <ReportesGrid
+                {/* Lista de Reportes */}
+                <ReportesList
                     reportes={reportes}
                     onVerAnalisis={setAnalisisActivo}
                     formatearFecha={formatearFecha}
@@ -165,7 +166,7 @@ const Bitacora = () => {
                 <AnalysisPanel
                     visible={!!analisisActivo}
                     onClose={() => setAnalisisActivo(null)}
-                    reporte={reportes.find(r => r.id === analisisActivo)}
+                    reporte={reportesEjemplo.find(r => r.id === analisisActivo)}
                 />
             </ContentLayout>
         </div>

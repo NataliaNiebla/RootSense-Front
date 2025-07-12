@@ -2,38 +2,29 @@
 .bitacora-filters-card {
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-border);
     background-color: var(--color-white);
+    margin-bottom: 1.5rem;
 }
 
 .bitacora-filters-card .ant-card-head {
     background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-    border-bottom: none;
-    border-radius: var(--border-radius) var(--border-radius) 0 0;
-    padding: 0rem 1rem;
 }
 
 .filter-title {
     display: flex;
-    align-items: center;  
-    gap: 1rem;
-    color: var(--color-white);
-}
-
-.filter-icon {
+    align-items: center;
+    gap: .5rem;
     font-size: 1rem;
 }
 
-/*.bitacora-filters-form {
-  
-}*/
-
-/*.bitacora-filters-form .ant-form-item {
-    margin-bottom: 16px;
-}*/
+.filter-icon {
+    font-size: 1.2rem;
+}
 
 .bitacora-filters-form .ant-form-item-label > label {
     font-weight: 500;
-    color: var(--color-text);
+    color: var(--color-text-light) !important;
 }
 
 /* Estilos específicos para los inputs */
@@ -48,28 +39,28 @@
 .bitacora-filters-form .ant-picker:hover,
 .bitacora-filters-form .ant-input:hover,
 .bitacora-filters-form .ant-select-selector:hover {
-    border-color: var(--color-primary);
-    box-shadow: var(--shadow-sm);
+    border-color: var(--color-primary) !important;
+    box-shadow: var(--shadow-md) !important;
 }
 
 .bitacora-filters-form .ant-picker-focused,
 .bitacora-filters-form .ant-input:focus,
 .bitacora-filters-form .ant-select-focused .ant-select-selector {
-    border-color: var(--color-primary);
-    box-shadow: var(--shadow-sm);
+    border-color: var(--color-primary) !important;
+    box-shadow: var(--color-primary-dark);
 }
 
 /* Botones personalizados */
 .bitacora-filters-form .ant-btn {
     border-radius: var(--border-radius);
     font-weight: 600;
+    margin-top: .5rem;
     transition: all 0.3s ease;
 }
 
 .bitacora-filters-form .ant-btn-primary {
-    background: var(--color-primary);
+    background: var(--color-primary) !important;
     color: var(--color-primary-dark);
-    border: none;
     box-shadow: var(--shadow-sm);
 }
 
