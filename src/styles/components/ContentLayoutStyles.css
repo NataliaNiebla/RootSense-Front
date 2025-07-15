@@ -109,6 +109,11 @@
     box-shadow: var(--shadow-sm) !important;
 }
 
+.btn-action:hover {
+    box-shadow: var(--shadow-md) !important;
+    transform: scale(1.02);
+}
+
 .btn-secondary {
     background-color: var(--color-border);
 }

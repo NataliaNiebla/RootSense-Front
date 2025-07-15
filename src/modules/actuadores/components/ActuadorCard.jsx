@@ -24,7 +24,7 @@ const ActuadorCard = ({
     return (
         <div 
             className={`actuator-card ${isSelected ? 'selected' : ''}`}
-            onClick={() => onCardClick(actuador.bandeja)}
+            onClick={() => onCardClick(actuador.id)}
         >
             <div className="actuator-header">
                 <h3 className="actuator-title">

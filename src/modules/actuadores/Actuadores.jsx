@@ -38,7 +38,7 @@ const Actuadores = () => {
         cerrarModal,
         crearActuador,
         toggleEstadoActuador,
-        mostrarDetallesBandeja,
+        seleccionarActuador,
         cerrarDetalles
     } = useActuadores();
 
@@ -60,7 +60,7 @@ const Actuadores = () => {
                 <ActuadoresGrid 
                     actuadores={actuadores}
                     actuadorSeleccionado={actuadorSeleccionado}
-                    onCardClick={mostrarDetallesBandeja}
+                    onCardClick={seleccionarActuador}
                     onToggleEstado={toggleEstadoActuador}
                 />
 

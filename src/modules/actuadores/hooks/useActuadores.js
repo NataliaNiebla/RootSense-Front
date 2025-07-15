@@ -114,12 +114,16 @@ export const useActuadores = () => {
         mostrarMensaje('success', `Actuador ${actuadorId} ${nuevoEstado === 'activo' ? 'activado' : 'desactivado'} correctamente`);
     };
 
-    const mostrarDetallesBandeja = (bandejaId) => {
-        const bandeja = bandejas.find(b => b.id === bandejaId);
-        if (bandeja) {
-            setBandejaSeleccionada(bandeja);
-            setDetallesPanelActivo(true);
-            setActuadorSeleccionado(bandejaId);
+    const seleccionarActuador = (actuadorId) => {
+        setActuadorSeleccionado(actuadorId);
+        // Encontrar la bandeja del actuador seleccionado
+        const actuador = actuadores.find(a => a.id === actuadorId);
+        if (actuador) {
+            const bandeja = bandejas.find(b => b.id === actuador.bandeja);
+            if (bandeja) {
+                setBandejaSeleccionada(bandeja);
+                setDetallesPanelActivo(true);
+            }
         }
     };
 
@@ -146,7 +150,7 @@ export const useActuadores = () => {
         cerrarModal,
         crearActuador,
         toggleEstadoActuador,
-        mostrarDetallesBandeja,
+        seleccionarActuador,
         cerrarDetalles
     };
 };

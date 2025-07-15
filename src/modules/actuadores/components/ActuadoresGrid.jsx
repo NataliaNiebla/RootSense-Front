@@ -21,7 +21,7 @@ const ActuadoresGrid = ({
                 <ActuadorCard
                     key={actuador.id}
                     actuador={actuador}
-                    isSelected={actuadorSeleccionado === actuador.bandeja}
+                    isSelected={actuadorSeleccionado === actuador.id}
                     onCardClick={onCardClick}
                     onToggleEstado={onToggleEstado}
                 />
