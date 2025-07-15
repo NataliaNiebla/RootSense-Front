@@ -1,4 +1,4 @@
-/* ContentLayout Styles */
+/* Estilos ContentLayout */
 .content-layout {
     transition: margin-left 0.4s ease;
     flex-direction: column;
@@ -13,7 +13,7 @@
     margin: 4.5rem .3rem 0rem 15rem;
 }
 
-/* Section Title */
+/* Estilos Section Title */
 .section-title {
     color: var(--color-primary-dark) !important;
     font-size: 1.5rem !important;
@@ -25,12 +25,13 @@
     display: none !important;
 }
 
-/* Page Header */
+/* Estilos Page Header */
 .page-header {
     display: flex;
     justify-content: space-between;
 }
 
+/* Estilos boton para crear o agregar */
 .btn-add {
     background-color: var(--color-primary-light) !important;
     color: white !important;
@@ -58,6 +59,7 @@
     background-color: var(--color-primary-light) !important; /* Cambia a verde oscuro al hacer clic */
 }
 
+/* Estilos botones de detalles*/
 .btn-detail {
     background-color: transparent;
     border: 1px solid var(--color-primary) !important;
@@ -90,4 +92,37 @@
     background-color: transparent !important;
     color: var(--color-primary) !important;
     text-decoration: none !important;
+}
+
+/* Estilos botones de acción en actuadores */
+.btn-action {
+    border: none;
+    border-radius: var(--border-radius);
+    padding: .3rem 3rem !important;
+    font-weight: 500;
+    cursor: pointer;
+    text-transform: none !important;
+    transition: all 0.10s ease !important;
+    width: 100% !important;
+    margin-top: .5rem;
+    font-size: .8rem !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+.btn-secondary {
+    background-color: var(--color-border);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-white);
+}
+
+.btn-action.active {
+    background: linear-gradient(135deg, var(--color-desactivated) 0%, var(--color-error) 100%);
+    color: white;
+}
+
+.btn-action.inactive {
+    background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary-dark) 100%);
+    color: var(--color-white);
 }

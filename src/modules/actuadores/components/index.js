@@ -1,5 +1,4 @@
 // Componentes
-export { default as ActuadorIcon } from './ActuadorIcon';
 export { default as ActuadorCard } from './ActuadorCard';
 export { default as ActuadoresGrid } from './ActuadoresGrid';
 export { default as BandejaDetailsPanel } from './BandejaDetailsPanel';

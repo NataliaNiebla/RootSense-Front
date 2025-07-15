@@ -1,0 +1,77 @@
+/* Estilos para el panel de detalles */
+
+.details-panel {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    padding: 20px;
+    margin-top: 20px;
+    display: none;
+}
+
+.details-panel.active {
+    display: block;
+}
+
+.details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.details-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--color-primary-dark);
+    margin: 0;
+}
+
+.details-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--color-text-light);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.details-close:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.details-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.details-item {
+    margin-bottom: 15px;
+}
+
+.details-item:last-child {
+    margin-bottom: 0;
+}
+
+.details-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-light);
+    margin-bottom: 5px;
+    display: block;
+    text-transform: uppercase;
+}
+
+.details-value {
+    font-size: 16px;
+    color: var(--color-text);
+}

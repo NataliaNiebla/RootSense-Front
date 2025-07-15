@@ -1,0 +1,10 @@
+/* Archivo principal de estilos para Actuadores */
+/* Importa todos los archivos de estilos separados */
+
+@import './ActuadoresMessagesStyles.css';
+@import './ActuadoresButtonsStyles.css';
+@import './ActuadoresCardsStyles.css';
+@import './ActuadoresDetailsStyles.css';
+@import './ActuadoresModalStyles.css';
+@import './ActuadoresFormsStyles.css';
+@import './ActuadoresUtilitiesStyles.css';

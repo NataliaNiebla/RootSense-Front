@@ -1,5 +1,7 @@
 import React from 'react';
-import ActuadorIcon from './ActuadorIcon';
+import {RobotOutlined } from '@ant-design/icons';
+import ButtonAction from '../../../components/ButtonAction';
+
 
 const ActuadorCard = ({ 
     actuador, 
@@ -7,6 +9,18 @@ const ActuadorCard = ({
     onCardClick, 
     onToggleEstado 
 }) => {
+    // Iconos SVG integrados
+    const getActuadorIcon = (tipo) => {
+        // Importa los iconos de Ant Design en la parte superior del archivo:
+        // import { BulbOutlined, CloudOutlined, FanOutlined } from '@ant-design/icons';
+
+        const iconos = {
+            rociador: <RobotOutlined className="type-icon"  />,
+            ventilador: <RobotOutlined className="type-icon" />,
+            lampara: <RobotOutlined className="type-icon"/>
+        };
+        return iconos[tipo] || null;
+    };
     return (
         <div 
             className={`actuator-card ${isSelected ? 'selected' : ''}`}
@@ -14,7 +28,7 @@ const ActuadorCard = ({
         >
             <div className="actuator-header">
                 <h3 className="actuator-title">
-                    <ActuadorIcon tipo={actuador.tipo} />
+                    {getActuadorIcon(actuador.tipo)}
                     {actuador.tipo.charAt(0).toUpperCase() + actuador.tipo.slice(1)}
                 </h3>
                 <span className="actuator-id">ID: {actuador.id}</span>
@@ -32,16 +46,8 @@ const ActuadorCard = ({
                     </span>
                 </div>
             </div>
-            
-            <button 
-                className={`btn btn-toggle ${actuador.estado === 'activo' ? 'active' : 'inactive'}`}
-                onClick={(e) => {
-                    e.stopPropagation();
-                    onToggleEstado(actuador.id);
-                }}
-            >
-                {actuador.estado === 'activo' ? 'Desactivar' : 'Activar'}
-            </button>
+
+            <ButtonAction onClick={() => onToggleEstado(actuador.id)} estado={actuador.estado} />
         </div>
     );
 };

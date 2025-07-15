@@ -1,5 +1,13 @@
 import React from 'react';
 import '../../styles/actuadores/ActuadoresStyles.css';
+
+import '../../styles/actuadores/ActuadoresMessagesStyles.css';
+import '../../styles/actuadores/ActuadoresCardsStyles.css';
+import '../../styles/actuadores/ActuadoresDetailsStyles.css';
+import '../../styles/actuadores/ActuadoresModalStyles.css';
+import '../../styles/actuadores/ActuadoresFormsStyles.css';
+import '../../styles/actuadores/ActuadoresUtilitiesStyles.css';
+
 import Header from '../../components/Header';
 import ContentLayout from '../../components/ContentLayout';
 import { useActuadores } from './hooks/useActuadores';
@@ -36,19 +44,17 @@ const Actuadores = () => {
 
 
     return (
-        <div>
+        <div className="actuadores-page">
             <Header title="Actuadores" />
-            <div>
-                <h2 className="section-title">Lista de Actuadores</h2>
-                <ButtonAdd title="Agregar Actuador"/>
-            </div>
             
             <ContentLayout>
+                 <div className="action-bar">
+                    <h2 className="section-title">Actuadores</h2>
+                    <ButtonAdd title="Crear Actuador" onClick={abrirModal} />
+                 </div>
+                
                 {/* Mensaje de éxito/error */}
                 <MessageNotification mensaje={mensaje} />
-
-                {/* Acciones de contenedor */}
-                <ButtonAdd onAddClick={abrirModal} />
 
                 {/* Grid de tarjetas de actuadores */}
                 <ActuadoresGrid 
