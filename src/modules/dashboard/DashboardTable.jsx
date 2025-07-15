@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import DetailButton from '../../components/DetailButton';
+import { useNavigate } from 'react-router-dom';
+import DetailButton from '../../components/ButtonDetail';
 import ReportDetailPanel from '../reportes/ReportDetailPanel';
 import '../../styles/dashboard/DashboardTableStyles.css'; 
 import '../../styles/reportes/ReportesStyles.css'; 
@@ -29,8 +30,13 @@ const getStatusClass = (calidad) => {
 };
 
 const DashboardTable = () => {
+    const navigate = useNavigate();
     const [panelVisible, setPanelVisible] = useState(false);
     const [selectedReport, setSelectedReport] = useState(null);
+
+    const handleSeeAllClick = () => {
+        navigate('/reportes');
+    };
 
     const handleDetailClick = (reportData) => {
         // Transformar los datos del dashboard al formato esperado por ReportDetailPanel
@@ -61,7 +67,7 @@ const DashboardTable = () => {
             <section className="table-container">
                 <div className="table-header">
                     <h2>Reportes Semanales Recientes</h2>
-                    <ButtonSeeAll  />
+                    <ButtonSeeAll onClick={handleSeeAllClick} />
                 </div>
                 <table>
                     <thead>

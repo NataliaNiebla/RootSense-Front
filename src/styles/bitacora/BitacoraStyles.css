@@ -29,12 +29,6 @@
     margin-bottom: 0;
 }
 
-.form-group label {
-    display: block;
-    color: var(--color-text);
-    font-size: 8rem !important;
-    font-weight: 500;
-}
 
 .form-control {
     width: 100%;

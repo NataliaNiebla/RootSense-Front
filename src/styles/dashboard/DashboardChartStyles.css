@@ -18,7 +18,7 @@
 
 .chart-title {
     color: var(--color-primary-dark);
-    font-size: 16px;
+    font-size: 1rem !important;
     font-weight: 500;
 }
 
@@ -28,25 +28,30 @@
 }
 
 .chart-filter {
-    background-color: var(--color-background);
-    border: 1px solid var(--color-border);
-    border-radius: 20px;
-    padding: 5px 12px;
-    font-size: 12px;
+    background: linear-gradient(135deg, var(--color-sidebar) 0%, var(--color-primary) 100%);
+    border-radius: var(--border-radius);
+    color: white;
+    font-weight: 600;
+    padding: .3rem 1rem;
+    font-size: .8rem;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
+    box-shadow: var(--shadow-sm);
 }
 
 .chart-filter.active {
-    background-color: var(--color-primary-dark);
+    background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%) !important;
     color: white;
-    border-color: var(--color-primary-dark);
+    transform: translateY(-4px);
+    transition: transform 0.2s, background-color 0.9s, color 0.3s !important;
+    box-shadow: var(--shadow-md);
 }
 
 .chart-filter:hover {
     background-color: var(--color-primary-light);
-    color: white;
     border-color: var(--color-primary-light);
+    box-shadow: var(--shadow-lg);
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
 }
 
 canvas {

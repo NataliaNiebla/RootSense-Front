@@ -43,7 +43,7 @@ header.sidebar-collapsed .header-general {
 }
 
 .logout-btn {
-    background-color: var(--color-primary-dark);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     color: white !important;
     border: none;
     border-radius: var(--border-radius);
@@ -57,16 +57,15 @@ header.sidebar-collapsed .header-general {
 }
 
 .logout-btn:hover {
-    opacity: 0.8;
     color: white !important;
-    background-color: var(--color-primary-light) !important;
+    background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%) !important; 
     box-shadow: var(--shadow-md); 
+    transform: translateY(-2px);
 }
 
 .logout-btn:active {
     transform: scale(0.98);
     background-color: var(--color-primary-dark) !important; /* Cambia a verde oscuro al hacer clic */
-
 }
 
 /* Espaciado para evitar que el contenido se oculte debajo del header fijo */

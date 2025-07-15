@@ -33,7 +33,7 @@
 
 /* Estilos boton para crear o agregar */
 .btn-add {
-    background-color: var(--color-primary-light) !important;
+    background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
     color: white !important;
     border: none;
     border-radius: var(--border-radius) !important;
@@ -41,17 +41,17 @@
     font-size: .9rem !important;
     font-weight: 500;
     cursor: pointer;
-    transition: opacity 0.4s, transform 0.2s;
+    transition: transform 0.2s, background-color 0.3s, color 0.3s;
     box-shadow: var(--shadow-sm) !important;
     margin:0;
     bottom: .4rem; 
 }
 
 .btn-add:hover {
-    opacity: 0.8;
     color: white !important;
-    background-color: var(--color-primary-dark) !important;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%) !important;
     box-shadow: var(--shadow-md) !important; 
+    transform: translateY(-2px);
 }
 
 .btn-add:active {
@@ -62,18 +62,21 @@
 /* Estilos botones de detalles*/
 .btn-detail {
     background-color: transparent;
-    border: 1px solid var(--color-primary) !important;
-    color: var(--color-primary-dark);
+    border: 1px solid var(--color-sidebar) !important;
+    color: var(--color-sidebar) !important;
     border-radius: var(--border-radius);
     padding: .3rem 1rem !important;
     font-size: .8rem !important;
+    font-weight: 500;
     cursor: pointer; 
+    transition: transform 0.2s, background-color 0.3s, color 0.3s;
     transition: background-color 0.3s, color 0.3s;
 }
 
 .btn-detail:hover {
-    background-color: var(--color-primary);
-    color: white;
+    background-color: var(--color-sidebar-hover) !important;
+    color: var(--color-sidebar) !important;
+    box-shadow: var(--shadow-sm) !important;
 }
 
 .btn-see-all {
@@ -130,4 +133,47 @@
 .btn-action.inactive {
     background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary-dark) 100%);
     color: var(--color-white);
+}
+
+/* Estilos Modal Button */
+.modal-footer .btn-cancel,
+.modal-footer .btn-save {
+    padding: .3rem 1rem !important;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: .8rem !important;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.1s ease;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+.modal-footer .btn-cancel {
+    background-color: var(--color-border);
+    color: var(--color-text);
+}
+
+.modal-footer .btn-cancel:hover {
+    opacity: 0.8;
+    transform: translateY(-2px);
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: var(--shadow-md) !important;
+}
+
+.modal-footer .btn-save {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.modal-footer .btn-save:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    background-color: var(--color-primary-dark);
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: var(--shadow-md) !important;
+}
+
+.modal-footer .btn-cancel:active,
+.modal-footer .btn-save:active {
+    transform: scale(0.98);
 }

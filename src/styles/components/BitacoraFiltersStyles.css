@@ -113,32 +113,31 @@
 }
 
 .bitacora-filters-form .ant-btn-primary {
-    background: var(--color-primary) !important;
-    border-color: var(--color-primary) !important;
+    background: linear-gradient(135deg, var(--color-error) 0%, var(--color-desactivated) 100%);
     color: var(--color-primary-dark) !important;
     box-shadow: var(--shadow-sm);
+    color: var(--color-white) !important;
+    box-shadow: var(--shadow-sm) !important;
+    transition: transform 0.2s, background-color 0.3s, color 0.3s !important;
 }
 
 .bitacora-filters-form .ant-btn-primary:hover {
     background: var(--color-primary-light) !important;
-    border-color: var(--color-primary-light) !important;
     box-shadow: var(--shadow-md);
-}
-
-.bitacora-filters-form .ant-btn-primary:active {
-    transform: translateY(0);
+    transform: translateY(-2px) !important;
 }
 
 .bitacora-filters-form .ant-btn:not(.ant-btn-primary) {
-    border: 1px solid var(--color-border);
+    border: 2px solid var(--color-border);
     background: var(--color-white);
     color: var(--color-text);
+    box-shadow: var(--shadow-sm);
 }
 
 .bitacora-filters-form .ant-btn:not(.ant-btn-primary):hover {
-    border-color: var(--color-primary);
-    color: var(--color-primary-dark);
     background: var(--color-container);
+    box-shadow: var(--shadow-md) !important;
+    transform: translateY(-2px) !important;
 }
 
 .bitacora-filters-form .ant-btn:disabled {

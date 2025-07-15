@@ -7,15 +7,16 @@
     box-shadow: var(--shadow-sm);
     overflow: hidden;
     transition: box-shadow 0.3s;
-    width: 98%;
 }
 
 .bandeja-card:hover {
     box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+    transition: transform 0.2s, box-shadow 0.3s;
 }
 
 .bandeja-header {
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-desactivated) 100%);
     color: var(--color-white) !important;
     padding: 1rem 1.5rem;
     position: relative; 
@@ -48,13 +49,13 @@
 .info-label {
     font-weight: 500;
     font-size: .8rem !important;
-    color: var(--color-text);
+    color: var(--color-text-light) !important;
     min-width: 100px !important;
     text-transform: none !important; 
 }
 
 .info-value {
-    color: var(--color-text-light);
+    color: var(--color-text) !important;
     font-size: .8rem !important;
 }
 
@@ -64,21 +65,22 @@
 }
 
 .btn-sensors {
-    background-color: var(--color-primary);
-    color: white;
-    border: none;
+    background-color: transparent;
+    border: 1px solid var(--color-sidebar) !important;
+    color: var(--color-sidebar) !important;
     border-radius: var(--border-radius);
-    padding: 8px 16px;
-    font-size: .8rem;
+    padding: .3rem 1rem !important;
+    font-size: .8rem !important;
     font-weight: 500;
-    cursor: pointer;
-    transition: opacity 0.3s;
-    display: flex;
-    align-items: center;
+    cursor: pointer; 
+    transition: transform 0.2s, background-color 0.3s, color 0.3s;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .btn-sensors:hover {
-    opacity: 0.8;
+    background-color: var(--color-sidebar-hover) !important;
+    color: var(--color-sidebar) !important;
+    box-shadow: var(--shadow-sm) !important;
 }
 
 .btn-sensors .icon {

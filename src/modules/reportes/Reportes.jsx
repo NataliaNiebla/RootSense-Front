@@ -3,6 +3,8 @@ import Header from '../../components/Header';
 import ContentLayout from '../../components/ContentLayout';
 import { usePage } from '../../hooks/usePage';
 import '../../styles/reportes/ReportesStyles.css';
+import '../../styles/reportes/ReportesTableStyles.css';
+import '../../styles/reportes/ReportesDetailPanelStyles.css';
 import ButtonAdd from '../../components/ButtonAdd';
 import DataTable from '../../components/DataTable';
 import ReportDetailPanel from './ReportDetailPanel';

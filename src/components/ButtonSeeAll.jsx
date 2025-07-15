@@ -3,8 +3,8 @@ import { Button } from 'antd';
 
 import '../styles/components/ContentLayoutStyles.css';
 
-const ButtonSeeAll = () => (
-    <Button className="btn-see-all">
+const ButtonSeeAll = ({ onClick, ...props }) => (
+    <Button className="btn-see-all" onClick={onClick} {...props}>
         Ver todo
     </Button>
 );

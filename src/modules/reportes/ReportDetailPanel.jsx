@@ -1,32 +1,57 @@
 import React from 'react';
 import InfoGroup from './InfoGroup';
+import Modal from '../../components/Modal';
+import '../../styles/reportes/ReportesStyles.css';
 
 const ReportDetailPanel = ({ 
     isVisible = false, 
     report = null, 
     onClose = () => {} 
 }) => {
-    if (!isVisible || !report) {
+    if (!report) {
         return null;
     }
 
     return (
-        <div className="report-detail active">
-            <div className="detail-header">
-                <h3 className="detail-title">
-                    Detalle del Reporte <span>{report.id}</span>
-                </h3>
-                <button className="detail-close" onClick={onClose}>
-                    ×
-                </button>
-            </div>
+        <Modal 
+            isOpen={isVisible}
+            onClose={onClose}
+            title={`Detalle del Reporte ${report.id}`}
+            size="large"
+            overlayClose={true}
+        >
             <div className="detail-content">
                 <div className="detail-grid">
                     <div className="detail-image">
-                        <img
-                            src={report.image}
-                            alt="Imagen del reporte"
-                        />
+                        {report.image ? (
+                            <img
+                                src={report.image}
+                                alt={`Reporte ${report.id}`}
+                                onError={(e) => {
+                                    e.target.style.display = 'none';
+                                    e.target.nextSibling.style.display = 'flex';
+                                }}
+                            />
+                        ) : null}
+                        <div 
+                            className="image-placeholder" 
+                            style={{ 
+                                display: report.image ? 'none' : 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                height: '100%',
+                                backgroundColor: 'var(--color-background)',
+                                color: 'var(--color-text-light)',
+                                fontSize: '14px',
+                                flexDirection: 'column',
+                                gap: '8px'
+                            }}
+                        >
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                            </svg>
+                            <span>Sin imagen disponible</span>
+                        </div>
                     </div>
                     <div className="detail-info">
                         <InfoGroup label="ID Reporte" value={report.id} />
@@ -51,7 +76,7 @@ const ReportDetailPanel = ({
                     </div>
                 </div>
             </div>
-        </div>
+        </Modal>
     );
 };
 

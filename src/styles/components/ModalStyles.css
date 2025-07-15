@@ -31,7 +31,6 @@
     flex-direction: column;
     transform: scale(0.9) translateY(-20px); 
     transition: transform 0.3s ease;
-   
 }
 
 .modal-overlay.active .modal {
@@ -78,7 +77,7 @@
 .modal-close {
     background: none;
     border: none;
-    font-size: 24px;
+    font-size: 1rem;
     color: var(--color-text-secondary);
     cursor: pointer;
     width: 32px;
@@ -96,7 +95,7 @@
 }
 
 .modal-body {
-    padding: .5rem !important;
+    padding: 0rem !important;
     overflow-y: auto;
     flex: 1;  
     text-transform: none !important; /* Prevents text-transform from being applied */
@@ -105,18 +104,16 @@
 .modal-footer {
     display: flex;
     justify-content: flex-end;
-    gap: 12px;
-    padding: 16px 24px;
-    border-top: 1px solid var(--color-border);
+    gap: 1rem;
     background-color: var(--color-background);
 }
 
 /* Form styles within modal */
 .modal-body .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 1rem;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 1rem !important;
 }
 
 .modal-body .form-group:last-child {
@@ -135,19 +132,20 @@
 
 .modal-body .form-control {
     width: 100%;
-    padding: 10px 15px;
-    border: 1px solid var(--color-border);
+    padding: .6rem 1rem !important; 
+    border: 1px solid var(--color-border) !important;
     border-radius: var(--border-radius);
-    font-size: 14px;
-    color: var(--color-text);
+    font-size: .9rem !important;
+    color: var(--color-text-secondary);
+    margin-bottom: 0px !important;
     background-color: var(--color-white);
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .modal-body .form-control:focus {
     outline: none;
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.1);
+    border-color: var(--color-primary-light) !important;
+    box-shadow: var(--shadow-md); /* Sombra al enfocar */
 }
 
 .modal-body textarea.form-control {
@@ -159,24 +157,25 @@
 .modal-body .file-input-wrapper {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 1rem;
 }
 
 .modal-body .file-input-label {
     background-color: var(--color-border);
     color: var(--color-text);
-    padding: 10px 16px;
+    padding: .6rem 1rem; 
     border-radius: var(--border-radius);
     cursor: pointer;
-    font-size: 14px;
+    font-size: .8rem !important;
     font-weight: 500;
     transition: background-color 0.2s ease;
     white-space: nowrap;
 }
 
 .modal-body .file-input-label:hover {
-    background-color: var(--color-primary);
-    color: white;
+    background-color: var(--color-sidebar-hover);
+    border-color: 1px var(--color-sidebar) !important;
+    color: var(--color-white);
 }
 
 .modal-body .file-input {
@@ -184,44 +183,9 @@
 }
 
 .modal-body .file-name {
-    font-size: 14px;
+    font-size: .8rem !important;
     color: var(--color-text-secondary);
     flex: 1;
-}
-
-/* Button styles */
-.modal-footer .btn-cancel,
-.modal-footer .btn-save {
-    padding: 10px 20px;
-    border: none;
-    border-radius: var(--border-radius);
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: opacity 0.2s ease, transform 0.1s ease;
-}
-
-.modal-footer .btn-cancel {
-    background-color: var(--color-border);
-    color: var(--color-text);
-}
-
-.modal-footer .btn-cancel:hover {
-    opacity: 0.8;
-}
-
-.modal-footer .btn-save {
-    background-color: var(--color-primary);
-    color: white;
-}
-
-.modal-footer .btn-save:hover {
-    opacity: 0.9;
-}
-
-.modal-footer .btn-cancel:active,
-.modal-footer .btn-save:active {
-    transform: scale(0.98);
 }
 
 /* Detail styles for report modals */

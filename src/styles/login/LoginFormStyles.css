@@ -3,11 +3,11 @@
     background-color: var(--color-container); 
     max-width: 400px;
     width: 100%;
-    margin: 12vh auto; /* Centrado horizontal */
+    margin: 13vh auto; /* Centrado horizontal */
     border-radius: var(--border-radius); 
-    box-shadow: var(--shadow); 
+    box-shadow: var(--shadow-lg); 
     overflow: hidden; /* Evita que los elementos sobresalgan */
-    padding: 20px; 
+    padding: 1rem; 
     display: flex;
     flex-direction: column; /* Coloca los elementos en columna */
 }
@@ -23,30 +23,30 @@
     margin: 15px 0 10px 0; /* Espacio encima y debajo del logo */
 }
 
-.tagline {
+/* Eslogan debajo del logo */
+.tagline {   
     font-family: 'Roboto', sans-serif; /* Fuente Roboto */
-    color: #666; /* Gris medio */
+    color: var(--color-text); 
     font-size: 14px;
-    margin-bottom: 20px;
     font-weight: 300;
 }
 
 /* Formulario */
 .login-form {
-    padding: 0 20px 10px;  /*Espaciado interno del formulario */
+    padding: 1rem;
 }
 
 .login-form .ant-form-item-label,
 .login-form .custom-label {
     display: block;
-    color: #555;
-    font-size: 14px;
+    color: var(--color-text-secondary) !important;
+    font-size: .9rem !important;
     font-weight: 500;
-    margin: 20px 0 5px 0 !important; /* Espacio entre la etiqueta y el input */
+    margin: 1rem 0 .5rem 0 !important; /* Espacio entre la etiqueta y el input */
 }
 
 .ant-form-item {
-    margin-bottom: 0px !important;
+    margin-bottom: 0 !important;
 }
 
 .login-form .ant-form-item-control {
@@ -57,33 +57,33 @@
     background-color: var(--color-background);
     color: var(--color-text-secondary) !important; /* Color del texto */
     width: 100%;
-    padding: 10px 15px; /* Espaciado interno del input */
+    padding: .6rem 1rem; /* Espaciado interno del input */
     border: 1px solid var(--color-border); 
     border-radius: var(--border-radius); 
-    font-size: 16px;
+    font-size: 1rem !important; 
     transition: border-color 0.3s, box-shadow 0.3s;
     margin-bottom: 0px !important;
 }
 
 .login-form .ant-input-password {
     width: 100%;
-    padding: 10px 15px; /* Espaciado interno del input */
+    padding: .6rem 1rem; /* Espaciado interno del input */
     border: 1px solid var(--color-border) !important; 
     border-radius: var(--border-radius); 
-    font-size: 16px;
+    font-size: 1rem !important; 
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .login-form .ant-input:focus { 
     outline: none;
     border-color: var(--color-primary-light); /* Verde claro al enfocar */
-    box-shadow: 0 0 0 2px rgba(129, 199, 132, 0.2); /* Sombra al enfocar */
+    box-shadow: var(--shadow-md); /* Sombra al enfocar */
 }
 
 /* Cuando el wrapper del password está enfocado */
 .login-form .ant-input-password.ant-input-affix-wrapper-focused {
     border-color: var(--color-primary-light) !important;
-    box-shadow: 0 0 0 2px rgba(82, 196, 26, 0.2) !important;
+    box-shadow: var(--shadow-md) !important;
 }
 
 /* Botón */
@@ -93,12 +93,12 @@
 }
 
 .btn-login {
-    background-color: var(--color-primary); 
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     color: white;
     border: none;
     border-radius: var(--border-radius);
-    padding: 22px;
-    font-size: 16px;
+    padding: 1.2rem 1.5rem;
+    font-size: 1rem !important;
     font-weight: 500;
     cursor: pointer;
     transition: opacity 0.3s, transform 0.2s;
@@ -108,8 +108,9 @@
 
 .btn-login:hover{
     color: white !important;
-    background-color: var(--color-primary-light) !important;
+    background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%) !important;
     box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
 }
 
 .btn-login:active {
@@ -118,7 +119,8 @@
 }
 
 .login-button {
-    margin: 30px 0 20px 0 !important;
+    margin: 2rem 0 1.5rem 0rem !important;
+    width: 100%; 
 }
 
 /* Enlaces */
@@ -129,7 +131,7 @@
 .link-Auth a {
     color: var(--color-primary-dark); /* Verde oscuro */
     text-decoration: none;
-    font-size: 14px;
+    font-size: .9rem;
     transition: color 0.3s;
 }
 
