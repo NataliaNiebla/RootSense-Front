@@ -2,7 +2,7 @@
 .analysis-drawer .ant-drawer-header {
     background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     border-bottom: none;
-    padding: 20px 24px;
+    padding: 1rem !important;
 }
 
 .analysis-drawer .ant-drawer-title {
