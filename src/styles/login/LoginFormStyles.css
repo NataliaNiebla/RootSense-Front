@@ -143,15 +143,20 @@
 /* Responsive */
 @media (max-width: 480px) {
     .login-container {
-        width: 90%;
-        padding: 15px;
+        width: 70%;
+        padding: 1rem;
+        margin: 18vh auto; 
     }
 
     .login-form {
-        padding: 0 20px 20px;
+        padding: 1rem;
     }
 
-    h1 {
-        font-size: 22px;
-    }
+    login-form .ant-form-item-label,.login-form .custom-label {
+    display: block;
+    color: var(--color-text-secondary) !important;
+    font-size: .7rem !important;
+    font-weight: 500;
+    margin: .7rem 0 .5rem 0 !important; /* Espacio entre la etiqueta y el input */
+}
 }
